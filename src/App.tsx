@@ -5,9 +5,6 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import styled from 'styled-components';
-import Nav from './components/Nav';
-import Layout from './components/Layout';
 import Edit from './views/Edit';
 import Statistics from './views/Statistics';
 import Tags from './views/Tags';
