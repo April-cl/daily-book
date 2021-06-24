@@ -8,6 +8,10 @@ import {
 import styled from 'styled-components';
 import Nav from './components/Nav';
 import Layout from './components/Layout';
+import Edit from './views/Edit';
+import Statistics from './views/Statistics';
+import Tags from './views/Tags';
+import NoMatch from './views/NoMatch';
 
 
 
@@ -30,38 +34,6 @@ function App() {
         </Route>
       </Switch>
     </Router>
-  );
-}
-
-function Tags() {
-  return (
-    <Layout>
-      <h2>标签页</h2>
-    </Layout>
-  );
-}
-
-function Edit() {
-  return (
-    <Layout>
-      <h2>记账页</h2>
-    </Layout>
-  );
-}
-
-function Statistics() {
-  return (
-    <Layout>
-      <h2>统计页</h2>
-    </Layout>
-  );
-}
-
-function NoMatch() {
-  return (
-    <h2>
-      页面不存在
-    </h2>
   );
 }
 
