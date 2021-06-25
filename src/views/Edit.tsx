@@ -1,6 +1,7 @@
 import Layout from '../components/Layout';
 import React from 'react';
 import styled from 'styled-components';
+import Icon from '../components/Icon';
 
 const CategorySection = styled.section`
   color: #fff;
@@ -39,7 +40,40 @@ const CategorySection = styled.section`
   }
 `
 const DateSection = styled.section`
-  border: 1px solid darkblue;
+  position: relative;
+  cursor: pointer;
+  border-bottom: 1px solid #7a7a7a;
+  margin-bottom: 10px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  > input {
+    border: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    ::-webkit-calendar-picker-indicator {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  > .date {
+    background-color: #f0eff4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    > .icon {
+      margin: 0 2em;
+    }
+    > span, > svg{
+      vertical-align: middle;
+    }
+  }
 `
 const TagsSection = styled.section`
   background-color: #FFF;
@@ -53,6 +87,10 @@ const NumberPadSection = styled.section`
 `
 
 function Edit() {
+  const date = new Date();
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
   return (
     <Layout>
       <CategorySection>
@@ -63,7 +101,11 @@ function Edit() {
         <button className="saveRecord">保存</button>
       </CategorySection>
       <DateSection>
-        <input type="date"/>
+        <input type="date" />
+        <div className="date">
+          <Icon name='calendar' />
+          <span>{year}年{month}月{day}日</span>
+        </div>
       </DateSection>
       <TagsSection>
         <ul>
