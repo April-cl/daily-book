@@ -39,16 +39,18 @@ const CategorySection = styled.section`
     cursor: pointer;
   }
 `
+const TagsSection = styled.section`
+  background-color: #FFF;
+  border: 1px solid black;
+`
 const DateSection = styled.section`
   position: relative;
   cursor: pointer;
   border-bottom: 1px solid #7a7a7a;
-  margin-bottom: 10px;
   height: 40px;
   line-height: 40px;
   font-size: 16px;
   > input {
-    border: none;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -75,12 +77,17 @@ const DateSection = styled.section`
     }
   }
 `
-const TagsSection = styled.section`
-  background-color: #FFF;
-  border: 1px solid black;
-`
 const NotesSection = styled.section`
-  border: 1px solid red;
+  border-bottom: 1px solid #7a7a7a;
+  margin-bottom: 10px;
+  height: 40px;
+  line-height: 40px;
+  > .icon {
+    margin: 0 2em;
+  }
+  > input, > svg{
+    vertical-align: middle;
+  }
 `
 const NumberPadSection = styled.section`
   border: 1px solid purple;
@@ -100,13 +107,6 @@ function Edit() {
         </ul>
         <button className="saveRecord">保存</button>
       </CategorySection>
-      <DateSection>
-        <input type="date" />
-        <div className="date">
-          <Icon name='calendar' />
-          <span>{year}年{month}月{day}日</span>
-        </div>
-      </DateSection>
       <TagsSection>
         <ul>
           <li>衣</li>
@@ -116,11 +116,16 @@ function Edit() {
         </ul>
         <button>新增标签</button>
       </TagsSection>
+      <DateSection>
+        <input type="date" />
+        <div className="date">
+          <Icon name='calendar' />
+          <span>{year}年{month}月{day}日</span>
+        </div>
+      </DateSection>
       <NotesSection>
-        <label>
-          <span>备注</span>
-          <input type="text"/>
-        </label>
+        <Icon name='note' />
+        <input type="text" placeholder='添加备注' ></input>
       </NotesSection>
       <NumberPadSection>
         <div>0</div>
