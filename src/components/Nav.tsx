@@ -4,17 +4,20 @@ import React from 'react';
 import Icon from './Icon';
 
 const NavWrapper = styled.nav`
-  border: 1px solid blue;
+  background-color: #fff;
+  padding: 10px 0;
   ul {
     display: flex;
     li {
       width: 33.33%;
       text-align: center;
       a {
-        padding: 4px 0;
         display: flex;
         flex-direction: column;
         align-items: center;
+        .icon {
+          font-size: 24px;
+        }
         &.selected {
           color: #26b59a;
           .icon {
