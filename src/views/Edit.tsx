@@ -40,8 +40,37 @@ const CategorySection = styled.section`
   }
 `
 const TagsSection = styled.section`
-  background-color: #FFF;
-  border: 1px solid black;
+  background-color: #fff;
+  > ul {
+    display: flex;
+    flex-wrap: wrap;
+    > li {
+      padding: 12px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 25%;
+      .iconWrapper {
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+        border: 1px solid #f0eff4;
+        border-radius: 50%;
+        background-color: #f0eff4;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &.selected {
+        color: #26b59a;
+        .iconWrapper {
+          background-color: #26b59a;
+          fill: #fff;
+        }
+      }
+    }
+  }
 `
 const DateSection = styled.section`
   position: relative;
@@ -109,12 +138,37 @@ function Edit() {
       </CategorySection>
       <TagsSection>
         <ul>
-          <li>衣</li>
-          <li>食</li>
-          <li>住</li>
-          <li>行</li>
+          <li className='selected'>
+            <span className="iconWrapper">
+              <Icon name='diet' />
+            </span>
+            <span>餐饮</span>
+          </li>
+          <li className='selected'>
+            <span className="iconWrapper">
+            <Icon name='clothes' />
+            </span>
+            <span>服饰</span>
+          </li>
+          <li>
+            <span className="iconWrapper">
+            <Icon name='family' />
+            </span>
+            <span>居家</span>
+          </li>
+          <li>
+            <span className="iconWrapper">
+            <Icon name='transportation' />
+            </span>
+            <span>交通</span>
+          </li>
+          <li>
+            <span className="iconWrapper">
+            <Icon name='add' />
+            </span>
+            <span>新增标签</span>
+          </li>
         </ul>
-        <button>新增标签</button>
       </TagsSection>
       <DateSection>
         <input type="date" />
