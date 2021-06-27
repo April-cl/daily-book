@@ -114,13 +114,20 @@ const DateSection = styled.section`
     height: 100%;
     width: 100%;
     pointer-events: none;
+    position: relative;
 
     > .icon {
-      margin: 0 2em;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
-    > span, > svg {
-      vertical-align: middle;
+    > span {
+      display: inline-block;
+      width: 100%;
+      padding-right: 3em;
+      margin-left: 3em;
     }
   }
 `;
@@ -129,13 +136,21 @@ const NotesSection = styled.section`
   margin: 0 20px 20px;
   height: 40px;
   line-height: 40px;
+  position: relative;
+  font-size: 16px;
 
   > .icon {
-    margin: 0 2em;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  > input, > svg {
-    vertical-align: middle;
+  > input {
+    font-size: 16px;
+    width: 100%;
+    padding-right: 3em;
+    margin-left: 3em;
   }
 `;
 const NumberPadSection = styled.section`
