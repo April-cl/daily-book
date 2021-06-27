@@ -32,6 +32,24 @@ const CategorySection = styled.section`
     }
   }
 `;
+const OutputSection = styled.section`
+  color: #26b59a;
+  background-color: #fff;
+  > .outputWrapper {
+    display: flex;
+    height: 60px;
+    line-height: 60px;
+    margin: 0 20px;
+    border-bottom: 1px solid #eee;
+    > .tagSelected {
+    }
+    > .count {
+      flex-grow: 1;
+      font-size: 30px;
+      text-align: right;
+    }
+  }
+`
 const TagsSection = styled.section`
   background-color: #fff;
   flex-grow: 1;
@@ -39,7 +57,7 @@ const TagsSection = styled.section`
     display: flex;
     flex-wrap: wrap;
     > li {
-      padding: 12px 0;
+      padding: 12px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -70,6 +88,7 @@ const DateSection = styled.section`
   position: relative;
   cursor: pointer;
   border-bottom: 1px solid #7a7a7a;
+  margin: 10px 20px;
   height: 40px;
   line-height: 40px;
   font-size: 16px;
@@ -107,7 +126,7 @@ const DateSection = styled.section`
 `;
 const NotesSection = styled.section`
   border-bottom: 1px solid #7a7a7a;
-  margin-bottom: 10px;
+  margin: 0 20px 20px;
   height: 40px;
   line-height: 40px;
 
@@ -120,18 +139,6 @@ const NotesSection = styled.section`
   }
 `;
 const NumberPadSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  > .output {
-    color: #26b59a;
-    background-color: #fff;
-    font-size: 36px;
-    line-height: 72px;
-    text-align: right;
-    padding: 0 12px;
-    box-shadow: inset 0 -5px 3px -5px rgba(0, 0, 0, 0.35),
-    inset 0 5px 3px -5px rgba(0, 0, 0, 0.35);
-  }
   > .pad {
     padding: 10px;
     height: 240px;
@@ -178,6 +185,12 @@ function Edit() {
           <li>收入</li>
         </ul>
       </CategorySection>
+      <OutputSection>
+        <div className="outputWrapper">
+          <div className="tagSelected">餐饮</div>
+          <div className="count">0.00</div>
+        </div>
+      </OutputSection>
       <TagsSection>
         <ul>
           <li className="selected">
@@ -224,7 +237,6 @@ function Edit() {
         <input type="text" placeholder="添加备注"></input>
       </NotesSection>
       <NumberPadSection>
-        <div className="output">0</div>
         <div className="pad">
           <button>1</button>
           <button>2</button>
