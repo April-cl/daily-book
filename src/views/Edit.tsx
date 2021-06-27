@@ -34,22 +34,20 @@ const CategorySection = styled.section`
 `;
 const TagsSection = styled.section`
   background-color: #fff;
-
+  flex-grow: 1;
   > ul {
     display: flex;
     flex-wrap: wrap;
-
     > li {
       padding: 12px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 25%;
-
+      width: 20%;
+      font-size: 14px;
       .iconWrapper {
-        width: 60px;
-        height: 60px;
-        font-size: 30px;
+        width: 40px;
+        height: 40px;
         border: 1px solid #f0eff4;
         border-radius: 50%;
         background-color: #f0eff4;
@@ -58,10 +56,8 @@ const TagsSection = styled.section`
         justify-content: center;
         align-items: center;
       }
-
       &.selected {
         color: #26b59a;
-
         .iconWrapper {
           background-color: #26b59a;
           fill: #fff;
@@ -126,7 +122,6 @@ const NotesSection = styled.section`
 const NumberPadSection = styled.section`
   display: flex;
   flex-direction: column;
-
   > .output {
     color: #26b59a;
     background-color: #fff;
@@ -137,7 +132,6 @@ const NumberPadSection = styled.section`
     box-shadow: inset 0 -5px 3px -5px rgba(0, 0, 0, 0.35),
     inset 0 5px 3px -5px rgba(0, 0, 0, 0.35);
   }
-
   > .pad {
     padding: 10px;
     height: 240px;
@@ -145,7 +139,6 @@ const NumberPadSection = styled.section`
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-gap: 10px;
-
     > button {
       font-size: 20px;
       border-radius: 10px;
@@ -167,6 +160,10 @@ const NumberPadSection = styled.section`
     }
   }
 `;
+const EditLayout = styled(Layout)`
+    display:flex;
+    flex-direction: column;
+`
 
 function Edit() {
   const date = new Date();
@@ -174,7 +171,7 @@ function Edit() {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   return (
-    <Layout>
+    <EditLayout>
       <CategorySection>
         <ul>
           <li className="selected">支出</li>
@@ -184,33 +181,33 @@ function Edit() {
       <TagsSection>
         <ul>
           <li className="selected">
-            <span className="iconWrapper">
-              <Icon name="diet"/>
-            </span>
+          <span className="iconWrapper">
+            <Icon name="diet"/>
+          </span>
             <span>餐饮</span>
           </li>
           <li className="selected">
-            <span className="iconWrapper">
-            <Icon name="clothes"/>
-            </span>
+          <span className="iconWrapper">
+          <Icon name="clothes"/>
+          </span>
             <span>服饰</span>
           </li>
           <li>
-            <span className="iconWrapper">
-            <Icon name="family"/>
-            </span>
+          <span className="iconWrapper">
+          <Icon name="family"/>
+          </span>
             <span>居家</span>
           </li>
           <li>
-            <span className="iconWrapper">
-            <Icon name="transportation"/>
-            </span>
+          <span className="iconWrapper">
+          <Icon name="transportation"/>
+          </span>
             <span>交通</span>
           </li>
           <li>
-            <span className="iconWrapper">
-            <Icon name="add"/>
-            </span>
+          <span className="iconWrapper">
+          <Icon name="add"/>
+          </span>
             <span>新增标签</span>
           </li>
         </ul>
@@ -245,7 +242,7 @@ function Edit() {
           <button className="zero">0</button>
         </div>
       </NumberPadSection>
-    </Layout>
+    </EditLayout>
   );
 }
 
