@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import React from 'react';
+import Icon from '../../components/Icon';
 
-const TagsSection = styled.section`
+const Wrapper = styled.section`
   background-color: #fff;
   flex-grow: 1;
   > ul {
@@ -34,5 +36,43 @@ const TagsSection = styled.section`
     }
   }
 `;
+const TagsSection: React.FC = () => {
+  return (
+    <Wrapper>
+      <ul>
+        <li className="selected">
+          <span className="iconWrapper">
+            <Icon name="diet"/>
+          </span>
+          <span>餐饮</span>
+        </li>
+        <li className="selected">
+          <span className="iconWrapper">
+          <Icon name="clothes"/>
+          </span>
+          <span>服饰</span>
+        </li>
+        <li>
+          <span className="iconWrapper">
+          <Icon name="family"/>
+          </span>
+          <span>居家</span>
+        </li>
+        <li>
+          <span className="iconWrapper">
+          <Icon name="transportation"/>
+          </span>
+          <span>交通</span>
+        </li>
+        <li>
+          <span className="iconWrapper">
+          <Icon name="add"/>
+          </span>
+          <span>新增标签</span>
+        </li>
+      </ul>
+    </Wrapper>
+  )
+}
 
 export {TagsSection}

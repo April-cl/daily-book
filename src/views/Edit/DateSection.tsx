@@ -1,6 +1,13 @@
 import styled from 'styled-components';
+import React from 'react';
+import Icon from '../../components/Icon';
 
-const DateSection = styled.section`
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth() + 1;
+const day = date.getDate();
+
+const Wrapper = styled.section`
   position: relative;
   cursor: pointer;
   border-bottom: 1px solid #7a7a7a;
@@ -47,5 +54,16 @@ const DateSection = styled.section`
     }
   }
 `;
+const DateSection:React.FC = () => {
+  return (
+    <Wrapper>
+      <input type="date"/>
+      <div className="date">
+        <Icon name="calendar"/>
+        <span>{year}年{month}月{day}日</span>
+      </div>
+    </Wrapper>
+  )
+}
 
 export {DateSection}

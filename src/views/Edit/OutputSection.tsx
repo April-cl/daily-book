@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React from 'react';
 
-const OutputSection = styled.section`
+const Wrapper = styled.section`
   color: #26b59a;
   background-color: #fff;
   > .outputWrapper {
@@ -18,5 +19,15 @@ const OutputSection = styled.section`
     }
   }
 `
+const OutputSection: React.FC = () => {
+  return (
+    <Wrapper>
+      <div className="outputWrapper">
+        <div className="tagSelected">餐饮</div>
+        <div className="count">0.00</div>
+      </div>
+    </Wrapper>
+  )
+}
 
 export {OutputSection}

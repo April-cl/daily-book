@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import Icon from '../../components/Icon';
+import React from 'react';
 
-const NotesSection = styled.section`
+const Wrapper = styled.section`
   border-bottom: 1px solid #7a7a7a;
   margin: 0 20px 20px;
   height: 40px;
@@ -21,5 +23,14 @@ const NotesSection = styled.section`
     margin-left: 3em;
   }
 `;
+
+const NotesSection: React.FC = () => {
+  return (
+    <Wrapper>
+      <Icon name="note"/>
+      <input type="text" placeholder="添加备注"></input>
+    </Wrapper>
+  )
+}
 
 export {NotesSection}
