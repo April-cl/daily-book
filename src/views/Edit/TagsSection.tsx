@@ -40,6 +40,12 @@ const Wrapper = styled.section`
 const TagsSection: React.FC = () => {
   // eslint-disable-next-line
   const [tags, setTags] = useState<{iconName: string, chinese: string}[]>([{iconName: 'diet',chinese: '餐饮'}])
+  const addNewTag = () => {
+    const tagName = window.prompt('请输入新标签名字：')
+    if (tagName !== null) {
+      setTags([...tags, {iconName: 'custom', chinese: tagName}])
+    }
+  }
   return (
     <Wrapper>
       <ul>
@@ -55,7 +61,7 @@ const TagsSection: React.FC = () => {
             )
           })
         }
-        <li>
+        <li onClick={addNewTag}>
           <span className="iconWrapper">
           <Icon name="add"/>
           </span>
