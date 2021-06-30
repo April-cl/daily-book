@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from '../../components/Icon';
 
 const Wrapper = styled.section`
@@ -15,6 +15,7 @@ const Wrapper = styled.section`
       align-items: center;
       width: 20%;
       font-size: 14px;
+      
       .iconWrapper {
         width: 40px;
         height: 40px;
@@ -37,33 +38,23 @@ const Wrapper = styled.section`
   }
 `;
 const TagsSection: React.FC = () => {
+  // eslint-disable-next-line
+  const [tags, setTags] = useState<{iconName: string, chinese: string}[]>([{iconName: 'diet',chinese: '餐饮'}])
   return (
     <Wrapper>
       <ul>
-        <li className="selected">
-          <span className="iconWrapper">
-            <Icon name="diet"/>
-          </span>
-          <span>餐饮</span>
-        </li>
-        <li className="selected">
-          <span className="iconWrapper">
-          <Icon name="clothes"/>
-          </span>
-          <span>服饰</span>
-        </li>
-        <li>
-          <span className="iconWrapper">
-          <Icon name="family"/>
-          </span>
-          <span>居家</span>
-        </li>
-        <li>
-          <span className="iconWrapper">
-          <Icon name="transportation"/>
-          </span>
-          <span>交通</span>
-        </li>
+        {
+          tags.map((tag) => {
+            return (
+              <li key={tag.chinese}>
+                <span className="iconWrapper">
+                <Icon name={tag.iconName}/>
+                </span>
+                <span>{tag.chinese}</span>
+              </li>
+            )
+          })
+        }
         <li>
           <span className="iconWrapper">
           <Icon name="add"/>
