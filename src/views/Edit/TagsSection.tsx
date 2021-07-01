@@ -38,12 +38,19 @@ const Wrapper = styled.section`
   }
 `;
 const TagsSection: React.FC = () => {
-  // eslint-disable-next-line
   const [tags, setTags] = useState<{iconName: string, chinese: string}[]>([{iconName: 'diet',chinese: '餐饮'}])
+  const [selectedTag, setSelectedTag] = useState<boolean>(false)
   const addNewTag = () => {
     const tagName = window.prompt('请输入新标签名字：')
     if (tagName !== null) {
       setTags([...tags, {iconName: 'custom', chinese: tagName}])
+    }
+  }
+  const onToggleTag = (tag: any) => {
+    if (selectedTag) {
+      setSelectedTag(false)
+    } else {
+      setSelectedTag(true)
     }
   }
   return (
@@ -52,7 +59,7 @@ const TagsSection: React.FC = () => {
         {
           tags.map((tag) => {
             return (
-              <li key={tag.chinese}>
+              <li key={tag.chinese} onClick={() => onToggleTag(tag)} className={selectedTag? 'selected' : ''}>
                 <span className="iconWrapper">
                 <Icon name={tag.iconName}/>
                 </span>
