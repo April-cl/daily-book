@@ -53,13 +53,14 @@ const TagsSection: React.FC = () => {
       setSelectedTag(true)
     }
   }
+  const getClass = (selectedTag: boolean) => {return selectedTag? 'selected' : ''}
   return (
     <Wrapper>
       <ul>
         {
           tags.map((tag) => {
             return (
-              <li key={tag.chinese} onClick={() => onToggleTag(tag)} className={selectedTag? 'selected' : ''}>
+              <li key={tag.chinese} onClick={() => onToggleTag(tag)} className={getClass(selectedTag)}>
                 <span className="iconWrapper">
                 <Icon name={tag.iconName}/>
                 </span>
