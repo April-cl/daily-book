@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CategorySection } from './Edit/CategorySection';
 import { OutputSection } from './Edit/OutputSection';
@@ -13,11 +13,23 @@ const EditLayout = styled(Layout)`
     flex-direction: column;
 `
 
+type Category = '-' | '+'
+
 function Edit() {
+  const [record, setRecord] = useState({
+    tag: '',
+    note: '',
+    category: '-' as Category,
+    output: '0'
+  })
   return (
     <EditLayout>
-      <CategorySection />
-      {/*<OutputSection />*/}
+      <CategorySection value={record.category} onChange={(category) => {
+        setRecord({
+          ...record,
+          category: category
+        })}} />
+      <OutputSection output={record.output} />
       <TagsSection />
       <DateSection />
       <NotesSection />
