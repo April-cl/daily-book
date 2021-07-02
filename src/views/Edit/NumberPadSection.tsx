@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
+import { OutputSection } from './OutputSection';
 
 const Wrapper = styled.section`
   > .pad {
@@ -31,9 +32,58 @@ const Wrapper = styled.section`
   }
 `;
 const NumberPadSection: React.FC = () => {
+  const [output, _setOutput] = useState('0')
+  const setOutput = (output:string) => {
+    if (output.length > 16) {
+      output = output.slice(0, 16)
+    } else if (output.length === 0) {
+      output = '0'
+    }
+    _setOutput(output)
+  }
+  const onClickButtonWrapper = (e: React.MouseEvent) => {
+    const text = (e.target as HTMLButtonElement).innerText
+    if (text === null) {return}
+    switch (text) {
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        if (output === '0') {
+          setOutput(text)
+        } else {
+          setOutput(output + text)
+        }
+        break
+      case '.':
+        if (output.indexOf('.') >= 0) {return}
+        setOutput(output + '.')
+        break
+      case '删除':
+        if (output.length === 1) {
+          setOutput('0')
+        } else {
+          setOutput(output.slice(0, -1))
+        }
+        break
+      case '清除':
+        setOutput('0')
+        break
+      case 'OK':
+        console.log('用户点击了OK');
+        break
+    }
+  }
   return (
     <Wrapper>
-      <div className="pad">
+      <OutputSection output={output}></OutputSection>
+      <div className="pad" onClick={onClickButtonWrapper}>
         <button>1</button>
         <button>2</button>
         <button>3</button>

@@ -17,7 +17,7 @@ function Edit() {
   return (
     <EditLayout>
       <CategorySection />
-      <OutputSection />
+      {/*<OutputSection />*/}
       <TagsSection />
       <DateSection />
       <NotesSection />

@@ -19,12 +19,15 @@ const Wrapper = styled.section`
     }
   }
 `
-const OutputSection: React.FC = () => {
+type Props = {
+  output: string
+}
+const OutputSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <div className="outputWrapper">
         <div className="tagSelected">餐饮</div>
-        <div className="count">0.00</div>
+        <div className="count">{props.output}</div>
       </div>
     </Wrapper>
   )
