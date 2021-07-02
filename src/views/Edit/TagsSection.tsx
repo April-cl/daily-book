@@ -37,30 +37,31 @@ const Wrapper = styled.section`
     }
   }
 `;
+
 const TagsSection: React.FC = () => {
   const [tags, setTags] = useState<{iconName: string, chinese: string}[]>([{iconName: 'diet',chinese: '餐饮'}])
-  const [selectedTag, setSelectedTag] = useState<boolean>(false)
+  const [selectedTag, setSelectedTag] = useState<string>('')
   const addNewTag = () => {
     const tagName = window.prompt('请输入新标签名字：')
     if (tagName !== null) {
       setTags([...tags, {iconName: 'custom', chinese: tagName}])
     }
   }
-  const onToggleTag = (tag: any) => {
-    if (selectedTag) {
-      setSelectedTag(false)
+  const onToggleTag = (tag: string) => {
+    if (selectedTag === tag) {
+      setSelectedTag('')
     } else {
-      setSelectedTag(true)
+      setSelectedTag(tag)
     }
   }
-  const getClass = (selectedTag: boolean) => {return selectedTag? 'selected' : ''}
+  const getClass = (tag: string) => {return selectedTag === tag? 'selected' : ''}
   return (
     <Wrapper>
       <ul>
         {
           tags.map((tag) => {
             return (
-              <li key={tag.chinese} onClick={() => onToggleTag(tag)} className={getClass(selectedTag)}>
+              <li key={tag.chinese} onClick={() => onToggleTag(tag.chinese)} className={getClass(tag.chinese)}>
                 <span className="iconWrapper">
                 <Icon name={tag.iconName}/>
                 </span>
