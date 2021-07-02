@@ -30,7 +30,12 @@ function Edit() {
           category: category
         })}} />
       <OutputSection output={record.output} />
-      <TagsSection />
+      <TagsSection value={record.tag} onChange={(tag) => {
+        setRecord({
+          ...record,
+          tag: tag
+        })
+      }} />
       <DateSection />
       <NotesSection />
       <NumberPadSection />
