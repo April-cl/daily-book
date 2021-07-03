@@ -21,6 +21,7 @@ function Edit() {
     output: '0',
     tag: '',
     note: '',
+    amount: 0
   })
   return (
     <EditLayout>
@@ -43,7 +44,12 @@ function Edit() {
           note: note
         })
       }} />
-      <NumberPadSection />
+      <NumberPadSection value={record.amount} onChange={(amount: number) => {
+        setRecord({
+          ...record,
+          amount: amount
+        })
+      }} />
     </EditLayout>
   );
 }

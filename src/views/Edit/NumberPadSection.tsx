@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
-import { OutputSection } from './OutputSection';
+import React from 'react';
 
 const Wrapper = styled.section`
   > .pad {
@@ -31,15 +30,24 @@ const Wrapper = styled.section`
     }
   }
 `;
-const NumberPadSection: React.FC = () => {
-  const [output, _setOutput] = useState('0')
+
+type Props = {
+  value: number,
+  onChange: (value: number) => void
+}
+
+const NumberPadSection: React.FC<Props> = (props) => {
+  const output = props.value.toString()
+  let value
   const setOutput = (output:string) => {
     if (output.length > 16) {
-      output = output.slice(0, 16)
+      value = parseFloat(output.slice(0, 16))
     } else if (output.length === 0) {
-      output = '0'
+      value = 0
+    }else {
+      value = parseFloat(output);
     }
-    _setOutput(output)
+    props.onChange(value)
   }
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).innerText
@@ -82,7 +90,6 @@ const NumberPadSection: React.FC = () => {
   }
   return (
     <Wrapper>
-      <OutputSection output={output}></OutputSection>
       <div className="pad" onClick={onClickButtonWrapper}>
         <button>1</button>
         <button>2</button>
