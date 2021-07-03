@@ -17,10 +17,10 @@ type Category = '-' | '+'
 
 function Edit() {
   const [record, setRecord] = useState({
+    category: '-' as Category,
+    output: '0',
     tag: '',
     note: '',
-    category: '-' as Category,
-    output: '0'
   })
   return (
     <EditLayout>
@@ -37,7 +37,12 @@ function Edit() {
         })
       }} />
       <DateSection />
-      <NotesSection />
+      <NotesSection value={record.note} onChange={(note: string) => {
+        setRecord({
+          ...record,
+          note: note
+        })
+      }} />
       <NumberPadSection />
     </EditLayout>
   );
