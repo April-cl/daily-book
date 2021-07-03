@@ -18,19 +18,19 @@ type Category = '-' | '+'
 function Edit() {
   const [record, setRecord] = useState({
     category: '-' as Category,
-    output: '0',
     tag: '',
     note: '',
     amount: 0
   })
   return (
     <EditLayout>
+      {record.amount}
       <CategorySection value={record.category} onChange={(category) => {
         setRecord({
           ...record,
           category: category
         })}} />
-      <OutputSection output={record.output} />
+      <OutputSection value={record.amount} />
       <TagsSection value={record.tag} onChange={(tag) => {
         setRecord({
           ...record,
@@ -44,7 +44,7 @@ function Edit() {
           note: note
         })
       }} />
-      <NumberPadSection value={record.amount} onChange={(amount: number) => {
+      <NumberPadSection value={record.amount} onChange={(amount) => {
         setRecord({
           ...record,
           amount: amount
