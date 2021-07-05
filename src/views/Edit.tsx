@@ -32,7 +32,7 @@ function Edit() {
   return (
     <EditLayout>
       <CategorySection value={record.category} onChange={(category) => {onChange({category})}} />
-      <OutputSection value={record.output} />
+      <OutputSection output = {record.output} tag = {record.tag} />
       <TagsSection value={record.tag} onChange={(tag) => {onChange({tag})}} />
       <DateSection />
       <NotesSection value={record.note} onChange={(note: string) => {onChange({note})}} />

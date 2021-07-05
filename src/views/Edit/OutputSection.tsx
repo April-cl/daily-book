@@ -20,14 +20,15 @@ const Wrapper = styled.section`
   }
 `
 type Props = {
-  value: string
+  output: string,
+  tag: string
 }
 const OutputSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <div className="outputWrapper">
-        <div className="tagSelected">餐饮</div>
-        <div className="count">{props.value}</div>
+        <div className="tagSelected">{props.tag}</div>
+        <div className="count">{props.output}</div>
       </div>
     </Wrapper>
   )
