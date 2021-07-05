@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import Icon from '../../components/Icon';
-
-const date = new Date();
-const year = date.getFullYear();
-const month = date.getMonth() + 1;
-const day = date.getDate();
+import day from 'dayjs'
 
 const Wrapper = styled.section`
   position: relative;
@@ -54,13 +50,15 @@ const Wrapper = styled.section`
     }
   }
 `;
+
 const DateSection:React.FC = () => {
+  console.log(day().format('YYYY年M月D日'));
   return (
     <Wrapper>
       <input type="date"/>
       <div className="date">
         <Icon name="calendar"/>
-        <span>{year}年{month}月{day}日</span>
+        <span>{day().format('YYYY年M月D日')}</span>
       </div>
     </Wrapper>
   )
