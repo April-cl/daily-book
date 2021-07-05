@@ -51,14 +51,20 @@ const Wrapper = styled.section`
   }
 `;
 
-const DateSection:React.FC = () => {
-  console.log(day().format('YYYY年M月D日'));
+type Props = {
+  value: string,
+  onChange: (value: string) => void
+}
+
+const DateSection:React.FC<Props> = (props) => {
   return (
     <Wrapper>
-      <input type="date"/>
+      <input type="date" onChange={(e) => {
+        props.onChange(e.target.value)
+      }}/>
       <div className="date">
         <Icon name="calendar"/>
-        <span>{day().format('YYYY年M月D日')}</span>
+        <span>{day(props.value).format('YYYY年M月D日')}</span>
       </div>
     </Wrapper>
   )

@@ -21,7 +21,8 @@ function Edit() {
     tag: '',
     note: '',
     amount: 0,
-    output: '0'
+    output: '0',
+    createAt: (new Date()).toISOString()
   })
   const onChange = (obj: Partial<typeof record>) => {
     setRecord({
@@ -34,7 +35,7 @@ function Edit() {
       <CategorySection value={record.category} onChange={(category) => {onChange({category})}} />
       <OutputSection output = {record.output} tag = {record.tag} />
       <TagsSection value={record.tag} onChange={(tag) => {onChange({tag})}} />
-      <DateSection />
+      <DateSection value = {record.createAt} onChange={(createAt) => {onChange({createAt});}} />
       <NotesSection value={record.note} onChange={(note: string) => {onChange({note})}} />
       <NumberPadSection value={record.amount} onChange={(amount, output) => {onChange({amount, output})}} />
     </EditLayout>
