@@ -3,6 +3,7 @@ import React from 'react';
 import { useTags } from '../useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const TagList = styled.ul`
   background-color: #fff;
@@ -18,12 +19,14 @@ const TagList = styled.ul`
       margin-right: 20px;
       font-size: 18px;
     }
-    .chinese {
-      margin-left: 10px;
+    .tag {
       flex-grow: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      .chinese {
+        margin-left: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
     .menu {
       font-size: 18px;
@@ -41,10 +44,12 @@ function Tags() {
             <button className='delete' >
                 <Icon name='delete' />
             </button>
-            <span className='iconName' >
-                <Icon name={tag.iconName}/>
-            </span>
-            <span className='chinese' >{tag.chinese}</span>
+            <Link className='tag' to={'/tags/' + tag.chinese}>
+              <span className='iconName' >
+                  <Icon name={tag.iconName}/>
+              </span>
+              <span className='chinese' >{tag.chinese}</span>
+            </Link>
             <button className='menu' >
                 <Icon name='menu' />
             </button>
@@ -55,4 +60,4 @@ function Tags() {
   );
 }
 
-export default Tags
+export { Tags }

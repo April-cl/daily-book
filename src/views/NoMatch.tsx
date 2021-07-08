@@ -8,4 +8,4 @@ function NoMatch() {
   );
 }
 
-export default NoMatch
+export { NoMatch }

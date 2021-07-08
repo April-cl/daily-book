@@ -6,9 +6,10 @@ import {
   Redirect
 } from "react-router-dom";
 import Edit from './views/Edit';
-import Statistics from './views/Statistics';
-import Tags from './views/Tags';
-import NoMatch from './views/NoMatch';
+import { Statistics } from './views/Statistics';
+import { Tags } from './views/Tags';
+import { NoMatch } from './views/NoMatch';
+import { TagEdit } from './views/TagEdit';
 
 
 
@@ -16,16 +17,19 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/tags">
+        <Route exact path="/tags">
           <Tags />
         </Route>
-        <Route path="/edit">
+        <Route exact path="/tags/:tag">
+          <TagEdit />
+        </Route>
+        <Route exact path="/edit">
           <Edit />
         </Route>
-        <Route path="/statistics">
+        <Route exact path="/statistics">
           <Statistics />
         </Route>
-        <Redirect exact from='/' to='/edit'></Redirect>
+        <Redirect exact from='/' to='/tags'></Redirect>
         <Route path='*'>
           <NoMatch />
         </Route>
