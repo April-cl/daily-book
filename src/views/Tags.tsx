@@ -1,10 +1,56 @@
 import Layout from '../components/Layout';
 import React from 'react';
+import { useTags } from '../useTags';
+import Icon from '../components/Icon';
+import styled from 'styled-components';
+
+const TagList = styled.ul`
+  background-color: #fff;
+  font-size: 16px;
+  li {
+    display:flex;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+    margin: 0 20px;
+    .delete {
+      fill: #fc2b29;
+      margin-right: 20px;
+      font-size: 18px;
+    }
+    .chinese {
+      margin-left: 10px;
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .menu {
+      font-size: 18px;
+    }
+  }
+`
 
 function Tags() {
+  const {tags} = useTags()
   return (
     <Layout>
-      <h2>标签页</h2>
+      <TagList>
+        {tags.map(tag =>
+          <li key={tag.chinese}>
+            <button className='delete' >
+                <Icon name='delete' />
+            </button>
+            <span className='iconName' >
+                <Icon name={tag.iconName}/>
+            </span>
+            <span className='chinese' >{tag.chinese}</span>
+            <button className='menu' >
+                <Icon name='menu' />
+            </button>
+          </li>
+        )}
+      </TagList>
     </Layout>
   );
 }
