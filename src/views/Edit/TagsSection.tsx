@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import Icon from '../../components/Icon';
+import { useTags } from '../../useTags';
 
 const Wrapper = styled.section`
   background-color: #fff;
@@ -44,7 +45,7 @@ type Props = {
 }
 
 const TagsSection: React.FC<Props> = (props) => {
-  const [tags, setTags] = useState<{iconName: string, chinese: string}[]>([{iconName: 'diet',chinese: '餐饮'}])
+  const {tags, setTags} = useTags()
   const selectedTag = props.value
   const addNewTag = () => {
     const tagName = window.prompt('请输入新标签名字：')
