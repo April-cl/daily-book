@@ -40,7 +40,7 @@ function Tags() {
     <Layout>
       <TagList>
         {tags.map(tag =>
-          <li key={tag.chinese}>
+          <li key={tag.id}>
             <button className='delete' >
                 <Icon name='delete' />
             </button>

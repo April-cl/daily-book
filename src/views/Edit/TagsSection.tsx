@@ -40,34 +40,30 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-  value: string,
-  onChange: (value: string) => void
+  value: {id: number, chinese: string},
+  onChange: (value: {id: number, chinese: string}) => void
 }
 
 const TagsSection: React.FC<Props> = (props) => {
   const {tags, setTags} = useTags()
-  const selectedTag = props.value
+  const selectedTagId = props.value.id
   const addNewTag = () => {
     const tagName = window.prompt('请输入新标签名字：')
     if (tagName !== null) {
-      setTags([...tags, {iconName: 'custom', chinese: tagName}])
+      setTags([...tags, {id: Math.random(),iconName: 'custom', chinese: tagName}])
     }
   }
-  const onToggleTag = (tag: string) => {
-    if (selectedTag === tag) {
-      props.onChange('')
-    } else {
-      props.onChange(tag)
-    }
+  const onToggleTag = (tag: any) => {
+    props.onChange(selectedTagId === tag.id ? {} : tag)
   }
-  const getClass = (tag: string) => {return selectedTag === tag? 'selected' : ''}
+  const getClass = (tagId: number) => {return selectedTagId === tagId? 'selected' : ''}
   return (
     <Wrapper>
       <ul>
         {
           tags.map((tag) => {
             return (
-              <li key={tag.chinese} onClick={() => onToggleTag(tag.chinese)} className={getClass(tag.chinese)}>
+              <li key={tag.chinese} onClick={() => onToggleTag(tag)} className={getClass(tag.id)}>
                 <span className="iconWrapper">
                 <Icon name={tag.iconName}/>
                 </span>
