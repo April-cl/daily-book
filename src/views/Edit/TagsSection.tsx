@@ -68,7 +68,6 @@ const TagsSection: React.FC<Props> = (props) => {
                 <span className="iconWrapper">
                 <Icon name={tag.iconName}/>
                 </span>
-                {tag.id}
                 <span>{tag.chinese}</span>
               </li>
             )
