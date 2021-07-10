@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import Icon from '../../components/Icon';
 import { useTags } from '../../useTags';
+import { createId } from '../../lib/createId';
 
 const Wrapper = styled.section`
   background-color: #fff;
@@ -50,7 +51,7 @@ const TagsSection: React.FC<Props> = (props) => {
   const addNewTag = () => {
     const tagName = window.prompt('请输入新标签名字：')
     if (tagName !== null) {
-      setTags([...tags, {id: Math.random(),iconName: 'custom', chinese: tagName}])
+      setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}])
     }
   }
   const onToggleTag = (tag: any) => {
@@ -67,6 +68,7 @@ const TagsSection: React.FC<Props> = (props) => {
                 <span className="iconWrapper">
                 <Icon name={tag.iconName}/>
                 </span>
+                {tag.id}
                 <span>{tag.chinese}</span>
               </li>
             )

@@ -33,6 +33,9 @@ const TagList = styled.ul`
     }
   }
 `
+const AddTag = styled.button`
+  
+`
 
 function Tags() {
   const {tags} = useTags()
@@ -41,6 +44,7 @@ function Tags() {
       <TagList>
         {tags.map(tag =>
           <li key={tag.id}>
+            {tag.id}
             <button className='delete' >
                 <Icon name='delete' />
             </button>
@@ -55,6 +59,7 @@ function Tags() {
             </button>
           </li>
         )}
+        <AddTag>新建标签</AddTag>
       </TagList>
     </Layout>
   );
