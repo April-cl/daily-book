@@ -11,8 +11,6 @@ import { Tags } from './views/Tags';
 import { NoMatch } from './views/NoMatch';
 import { TagEdit } from './views/TagEdit';
 
-
-
 function App() {
   return (
     <Router>
@@ -20,7 +18,7 @@ function App() {
         <Route exact path="/tags">
           <Tags />
         </Route>
-        <Route exact path="/tags/:tag">
+        <Route exact path="/tags/:id">
           <TagEdit />
         </Route>
         <Route exact path="/edit">

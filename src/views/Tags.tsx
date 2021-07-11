@@ -1,10 +1,10 @@
-import Layout from '../components/Layout';
 import React from 'react';
 import { useTags } from '../useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { createId } from '../lib/createId';
+import { TopBar } from '../components/TopBar';
 
 const TagList = styled.ul`
   background-color: #fff;
@@ -62,29 +62,32 @@ function Tags() {
     }
   }
   return (
-    <TagList>
-      {tags.map(tag =>
-        <li key={tag.id}>
-          {tag.id}
-          <button className='delete' >
+    <>
+      <TopBar pageTitle={'标签设置'}></TopBar>
+      <TagList>
+        {tags.map(tag =>
+          <li key={tag.id}>
+            {tag.id}
+            <button className='delete' >
               <Icon name='delete' />
-          </button>
-          <Link className='tag' to={'/tags/' + tag.chinese}>
+            </button>
+            <Link className='tag' to={'/tags/' + tag.id}>
             <span className='iconName' >
                 <Icon name={tag.iconName}/>
             </span>
-            <span className='chinese' >{tag.chinese}</span>
-          </Link>
-          <button className='menu' >
+              <span className='chinese' >{tag.chinese}</span>
+            </Link>
+            <button className='menu' >
               <Icon name='menu' />
-          </button>
-        </li>
-      )}
-      <AddTag onClick={addNewTag}>
-        <Icon name='add' />
-        <span>新建标签</span>
-      </AddTag>
-    </TagList>
+            </button>
+          </li>
+        )}
+        <AddTag onClick={addNewTag}>
+          <Icon name='add' />
+          <span>新建标签</span>
+        </AddTag>
+      </TagList>
+    </>
   );
 }
 
