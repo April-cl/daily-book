@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import Icon from './Icon';
+import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.section`
   color: #fff;
@@ -8,6 +9,7 @@ const Wrapper = styled.section`
   background-color: #26b59a;
   position: relative;
   .return {
+    font-size: 16px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -20,21 +22,30 @@ const Wrapper = styled.section`
       vertical-align: middle;
     }
   }
-  .tagTitle {
+  .pageTitle {
     font-size: 20px;
     text-align: center;
   }
 `;
 
-const TopBar:React.FC<any> = (props) => {
+type Props = {
+  pageTitle: string
+}
+
+const TopBar:React.FC<Props> = (props) => {
+  const history = useHistory()
+  console.log(history);
+  const onClickBack = ()=>{
+    history.goBack()
+  }
   return (
     <Wrapper>
-      <div className="return">
+      <button className="return" onClick={onClickBack}>
         <Icon name='return' />
         <span>返回</span>
-      </div>
-      <div className="tagTitle">
-        页面标题
+      </button>
+      <div className="pageTitle">
+        {props.pageTitle}
       </div>
     </Wrapper>
   )
