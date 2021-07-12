@@ -1,8 +1,20 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useTags } from '../useTags';
 
-const TagEdit: React.FC = () => {
+type Params = {
+  id: string
+}
+
+const TagEdit: React.FC = (props) => {
+  const {findTag} = useTags()
+  let {id} = useParams<Params>()
+  const tag = findTag(parseInt(id))
+  console.log(tag);
   return (
-    <div>编辑标签</div>
+    <div>
+      {tag.chinese}
+    </div>
   )
 }
 
