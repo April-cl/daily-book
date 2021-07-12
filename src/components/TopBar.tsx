@@ -34,7 +34,6 @@ type Props = {
 
 const TopBar:React.FC<Props> = (props) => {
   const history = useHistory()
-  console.log(history);
   const onClickBack = ()=>{
     history.goBack()
   }
