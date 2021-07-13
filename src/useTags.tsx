@@ -11,7 +11,7 @@ const useTags = () => {
   const [tags, setTags] = useState<{id: number, iconName: string, chinese: string}[]>(defaultTags)
   const findTag = (id: number) => {
     return tags.filter((tag) => {
-      return tag.id ===id
+      return tag.id === id
     })[0]
   }
   const findTagIndex = (id: number) => {

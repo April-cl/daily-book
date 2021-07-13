@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { useTags } from '../useTags';
 import { TopBar } from '../components/TopBar';
 import Icon from '../components/Icon';
@@ -48,26 +47,26 @@ const TagEditWrapper = styled.div`
   }
 `
 
-type Params = {
-  id: string
+type Props = {
+  value: Tag
 }
 
-const TagEdit: React.FC = (props) => {
-  const {findTag, updateTag} = useTags()
-  let {id} = useParams<Params>()
-  const tag = findTag(parseInt(id))
+const TagEdit: React.FC<Props> = (props) => {
+  const {updateTag} = useTags()
+  let {id, iconName, chinese} = props.value
+  console.log(id);
   return (
     <TagEditWrapper>
       <div className="tagEdit">
         <TopBar pageTitle='编辑标签' />
         <div className="editIcon">
           <label className='legend'>图标</label>
-          <Icon name={tag.iconName} />
+          <Icon name={iconName} />
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input value={tag.chinese} onChange={(e) => {
-            updateTag(tag.id, {chinese: e.target.value})
+          <input value={chinese} onChange={(e) => {
+            updateTag(id, {chinese: e.target.value})
           }} />
         </div>
         <button className='submit'>确定修改</button>

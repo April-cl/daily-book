@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTags } from '../useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { createId } from '../lib/createId';
 import { TopBar } from '../components/TopBar';
+import { TagEdit } from './TagEdit';
 
 const TagList = styled.ul`
   background-color: #fff;
@@ -52,13 +52,35 @@ const AddTag = styled.button`
     margin-left: 5px;
   }
 `
+const EditWrapper = styled.div`
+  &.show {
+    display: block;
+  }
+  &.hide {
+    display: none;
+  }
+`
 
 function Tags() {
+  let [showEdit, setShowEdit] = useState(false)
+  let [selectedTag, setSelectedTag] = useState<Tag>({
+    id: 0,
+    iconName: '',
+    chinese: ''
+  })
   const {tags, setTags, deleteTag} = useTags()
   const addNewTag = () => {
     const tagName = window.prompt('请输入新标签名字：')
     if (tagName !== null) {
       setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}])
+    }
+  }
+  const toggleEdit = (tag: Tag) => {
+    if (showEdit) {
+      setShowEdit(false)
+    } else {
+      setShowEdit(true)
+      setSelectedTag(tag)
     }
   }
   return (
@@ -73,13 +95,13 @@ function Tags() {
             }}>
               <Icon name='delete' />
             </button>
-            <Link className='tag' to={'/tags/' + tag.id}>
-            <span className='iconName' >
-                <Icon name={tag.iconName}/>
-            </span>
+            <div className='tag'>
+              <span className='iconName' >
+                  <Icon name={tag.iconName}/>
+              </span>
               <span className='chinese' >{tag.chinese}</span>
-            </Link>
-            <button className='menu' >
+            </div>
+            <button className='menu' onClick={(e) => toggleEdit(tag)} >
               <Icon name='menu' />
             </button>
           </li>
@@ -89,6 +111,9 @@ function Tags() {
           <span>新建标签</span>
         </AddTag>
       </TagList>
+      <EditWrapper className={showEdit ? 'show' : 'hide'}>
+        <TagEdit value={selectedTag} />
+      </EditWrapper>
     </>
   );
 }
