@@ -53,7 +53,7 @@ type Params = {
 }
 
 const TagEdit: React.FC = (props) => {
-  const {findTag} = useTags()
+  const {findTag, updateTag} = useTags()
   let {id} = useParams<Params>()
   const tag = findTag(parseInt(id))
   return (
@@ -66,7 +66,9 @@ const TagEdit: React.FC = (props) => {
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input value={tag.chinese} />
+          <input value={tag.chinese} onChange={(e) => {
+            updateTag(tag.id, {chinese: e.target.value})
+          }} />
         </div>
         <button className='submit'>确定修改</button>
       </div>

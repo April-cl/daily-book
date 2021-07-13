@@ -14,7 +14,24 @@ const useTags = () => {
       return tag.id ===id
     })[0]
   }
-  return {tags, setTags, findTag}
+  const findTagIndex = (id: number) => {
+    let result = -1
+    for (let i = 0; i < tags.length; i++) {
+      if (tags[i].id === id) {
+        result = i
+        break
+      }
+    }
+    return result
+  }
+  const updateTag = (id: number, obj: {chinese: string}) => {
+    const index = findTagIndex(id)
+    const cloneTags = JSON.parse(JSON.stringify(tags))
+    cloneTags.splice(index, 1, {...cloneTags[index], chinese: obj.chinese})
+    setTags(cloneTags)
+    console.log(cloneTags);
+  }
+  return {tags, setTags, findTag, findTagIndex, updateTag}
 }
 
 export {useTags}
