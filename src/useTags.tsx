@@ -29,9 +29,14 @@ const useTags = () => {
     const cloneTags = JSON.parse(JSON.stringify(tags))
     cloneTags.splice(index, 1, {...cloneTags[index], chinese: obj.chinese})
     setTags(cloneTags)
-    console.log(cloneTags);
   }
-  return {tags, setTags, findTag, findTagIndex, updateTag}
+  const deleteTag = (id: number) => {
+    const index = findTagIndex(id)
+    const cloneTags = JSON.parse(JSON.stringify(tags))
+    cloneTags.splice(index, 1)
+    setTags(cloneTags)
+  }
+  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag}
 }
 
 export {useTags}

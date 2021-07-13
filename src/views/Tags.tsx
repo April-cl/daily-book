@@ -54,7 +54,7 @@ const AddTag = styled.button`
 `
 
 function Tags() {
-  const {tags, setTags} = useTags()
+  const {tags, setTags, deleteTag} = useTags()
   const addNewTag = () => {
     const tagName = window.prompt('请输入新标签名字：')
     if (tagName !== null) {
@@ -68,7 +68,9 @@ function Tags() {
         {tags.map(tag =>
           <li key={tag.id}>
             {tag.id}
-            <button className='delete' >
+            <button className='delete' onClick={(e) => {
+              deleteTag(tag.id)
+            }}>
               <Icon name='delete' />
             </button>
             <Link className='tag' to={'/tags/' + tag.id}>
