@@ -55,7 +55,8 @@ const TagEditWrapper = styled.div`
 
 type Props = {
   value: Tag,
-  showEdit: boolean
+  showEdit: boolean,
+  onClose: (showEdit: boolean) => void
 }
 
 const TagEdit: React.FC<Props> = (props) => {
@@ -63,6 +64,7 @@ const TagEdit: React.FC<Props> = (props) => {
   const [showEdit, setShowEdit] = useState(false)
   useEffect(() => {
     setShowEdit(props.showEdit)
+    console.log(showEdit);
   }, [props.showEdit])
   const getClass = () => {
     return showEdit ? 'show' : 'hide'
@@ -73,6 +75,7 @@ const TagEdit: React.FC<Props> = (props) => {
       <div className="tagEdit">
         <TopBar pageTitle='编辑标签' closeIcon={true} onClose={() => {
           setShowEdit(false)
+          props.onClose(false)
         }} />
         <div className="editIcon">
           <label className='legend'>图标</label>

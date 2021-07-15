@@ -103,7 +103,9 @@ function Tags() {
           <span>新建标签</span>
         </AddTag>
       </TagList>
-      <TagEdit value={selectedTag} showEdit={showEdit} />
+      <TagEdit value={selectedTag} showEdit={showEdit} onClose={(showEdit) => {
+        setShowEdit(showEdit)
+      }} />
     </>
   );
 }
