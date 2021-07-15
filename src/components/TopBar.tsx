@@ -22,6 +22,19 @@ const Wrapper = styled.section`
       vertical-align: middle;
     }
   }
+  .close {
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    .icon {
+      fill: #fff;
+      margin-right: 20px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
   .pageTitle {
     font-size: 20px;
     text-align: center;
@@ -29,23 +42,44 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-  pageTitle: string
+  pageTitle?: string,
+  returnIcon?: boolean,
+  closeIcon?: boolean,
+  onClose?: () => void
 }
 
 const TopBar:React.FC<Props> = (props) => {
   const history = useHistory()
-  const onClickBack = ()=>{
+  const onClickBack = () => {
     history.goBack()
+  }
+  const onClickClose = () => {
+    props.onClose && props.onClose()
   }
   return (
     <Wrapper>
-      <button className="return" onClick={onClickBack}>
-        <Icon name='return' />
-        <span>返回</span>
-      </button>
+      {(() => {
+        if (props.returnIcon) {
+          return (
+            <button className="return" onClick={onClickBack}>
+              <Icon name='return' />
+              <span>返回</span>
+            </button>
+          )
+        }
+      })()}
       <div className="pageTitle">
         {props.pageTitle}
       </div>
+      {(() => {
+        if (props.closeIcon) {
+          return (
+            <button className="close" onClick={onClickClose}>
+              <Icon name='close' />
+            </button>
+          )
+        }
+      })()}
     </Wrapper>
   )
 }

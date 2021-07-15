@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTags } from '../useTags';
 import { TopBar } from '../components/TopBar';
 import Icon from '../components/Icon';
@@ -11,6 +11,12 @@ const TagEditWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.5);
+  &.show {
+    display: block;
+  }
+  &.hide {
+    display: none;
+  }
   .tagEdit {
     position: absolute;
     top: 50%;
@@ -48,17 +54,26 @@ const TagEditWrapper = styled.div`
 `
 
 type Props = {
-  value: Tag
+  value: Tag,
+  showEdit: boolean
 }
 
 const TagEdit: React.FC<Props> = (props) => {
   const {updateTag} = useTags()
+  const [showEdit, setShowEdit] = useState(false)
+  useEffect(() => {
+    setShowEdit(props.showEdit)
+  }, [props.showEdit])
+  const getClass = () => {
+    return showEdit ? 'show' : 'hide'
+  }
   let {id, iconName, chinese} = props.value
-  console.log(id);
   return (
-    <TagEditWrapper>
+    <TagEditWrapper className={getClass()}>
       <div className="tagEdit">
-        <TopBar pageTitle='编辑标签' />
+        <TopBar pageTitle='编辑标签' closeIcon={true} onClose={() => {
+          setShowEdit(false)
+        }} />
         <div className="editIcon">
           <label className='legend'>图标</label>
           <Icon name={iconName} />

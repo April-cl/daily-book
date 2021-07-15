@@ -52,14 +52,6 @@ const AddTag = styled.button`
     margin-left: 5px;
   }
 `
-const EditWrapper = styled.div`
-  &.show {
-    display: block;
-  }
-  &.hide {
-    display: none;
-  }
-`
 
 function Tags() {
   let [showEdit, setShowEdit] = useState(false)
@@ -111,9 +103,7 @@ function Tags() {
           <span>新建标签</span>
         </AddTag>
       </TagList>
-      <EditWrapper className={showEdit ? 'show' : 'hide'}>
-        <TagEdit value={selectedTag} />
-      </EditWrapper>
+      <TagEdit value={selectedTag} showEdit={showEdit} />
     </>
   );
 }
