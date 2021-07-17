@@ -60,16 +60,17 @@ type Props = {
 }
 
 const TagEdit: React.FC<Props> = (props) => {
-  const {updateTag} = useTags()
+  const {updateTag, findTag} = useTags()
   const [showEdit, setShowEdit] = useState(false)
-  useEffect(() => {
-    setShowEdit(props.showEdit)
-    console.log(showEdit);
-  }, [props.showEdit])
   const getClass = () => {
     return showEdit ? 'show' : 'hide'
   }
-  let {id, iconName, chinese} = props.value
+  let {id} = props.value
+  const tag = findTag(id)
+
+  useEffect(() => {
+    setShowEdit(props.showEdit)
+  }, [props.showEdit])
   return (
     <TagEditWrapper className={getClass()}>
       <div className="tagEdit">
@@ -79,12 +80,12 @@ const TagEdit: React.FC<Props> = (props) => {
         }} />
         <div className="editIcon">
           <label className='legend'>图标</label>
-          <Icon name={iconName} />
+          <Icon name={tag?.iconName} />
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input value={chinese} onChange={(e) => {
-            updateTag(id, {chinese: e.target.value})
+          <input value={tag?.chinese} onChange={(e) => {
+            updateTag(tag.id, {chinese: e.target.value})
           }} />
         </div>
         <button className='submit'>确定修改</button>

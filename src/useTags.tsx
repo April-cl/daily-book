@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createId } from './lib/createId';
 
 const defaultTags = [
@@ -24,11 +24,13 @@ const useTags = () => {
     }
     return result
   }
-  const updateTag = (id: number, obj: {chinese: string}) => {
+  const updateTag = (id: number, {chinese}: {chinese: string}) => {
     const index = findTagIndex(id)
     const cloneTags = JSON.parse(JSON.stringify(tags))
-    cloneTags.splice(index, 1, {...cloneTags[index], chinese: obj.chinese})
+    cloneTags.splice(index, 1, {...cloneTags[index], chinese: chinese})
     setTags(cloneTags)
+    console.log(cloneTags);
+    console.log(tags);
   }
   const deleteTag = (id: number) => {
     const index = findTagIndex(id)
