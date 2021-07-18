@@ -80,11 +80,11 @@ const TagEdit: React.FC<Props> = (props) => {
         }} />
         <div className="editIcon">
           <label className='legend'>图标</label>
-          <Icon name={tag.iconName} />
+          <Icon name={tag?.iconName} />
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input value={tag.chinese} onChange={(e) => {
+          <input value={tag?.chinese} onChange={(e) => {
             updateTag(tag.id, {chinese: e.target.value})
           }} />
         </div>

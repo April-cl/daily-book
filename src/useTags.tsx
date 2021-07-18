@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createId } from './lib/createId';
+import { useUpdate } from './hooks/useUpdate';
 
-const defaultTags = [
-  {id: createId(), iconName: 'diet',chinese: '餐饮'},
-  {id: createId(), iconName: 'clothes',chinese: '服饰'},
-  {id: createId(), iconName: 'family',chinese: '家用'},
-  {id: createId(), iconName: 'study',chinese: '学习'}
-]
 const useTags = () => {
-  const [tags, setTags] = useState<{id: number, iconName: string, chinese: string}[]>(defaultTags)
+  const [tags, setTags] = useState<{id: number, iconName: string, chinese: string}[]>([])
+  useEffect(() => {
+    let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]')
+    if (localTags.length === 0) {
+      localTags = [
+        {id: createId(), iconName: 'diet',chinese: '餐饮'},
+        {id: createId(), iconName: 'clothes',chinese: '服饰'},
+        {id: createId(), iconName: 'family',chinese: '家用'},
+        {id: createId(), iconName: 'study',chinese: '学习'}
+      ]
+    }
+    setTags(localTags)
+  }, [])
+  useUpdate(() => {
+    window.localStorage.setItem('tags', JSON.stringify(tags))
+  }, [tags])
   const findTag = (id: number) => {
     if (id === 0) {
       return {id: 0, chinese: '', iconName: ''}
@@ -39,7 +49,16 @@ const useTags = () => {
     cloneTags.splice(index, 1)
     setTags(cloneTags)
   }
-  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag}
+  const addTag = () => {
+    const tagName = window.prompt('新标签的名称为');
+    if (tagName !== null && tagName !== '') {
+      setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}]);
+    }
+  };
+  // const addTag = (tagName: string) => {
+  //   setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}])
+  // }
+  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag}
 }
 
 export {useTags}

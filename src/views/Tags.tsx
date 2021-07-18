@@ -56,23 +56,21 @@ const AddTag = styled.button`
 function Tags() {
   let [showEdit, setShowEdit] = useState(false)
   let [selectedTag, setSelectedTag] = useState<Tag>({
-    id: 0,
-    iconName: '',
+    id: createId(),
+    iconName: 'custom',
     chinese: ''
   })
-  const {tags, setTags, deleteTag} = useTags()
+  const {tags, addTag, deleteTag} = useTags()
   const addNewTag = () => {
-    const tagName = window.prompt('请输入新标签名字：')
-    if (tagName !== null) {
-      setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}])
-    }
+    toggleEdit({id: createId(), iconName: 'custom', chinese: ''})
   }
-  const toggleEdit = (tag: Tag) => {
+  const toggleEdit = (tag: Tag, fn?: () => void) => {
     if (showEdit) {
       setShowEdit(false)
     } else {
       setShowEdit(true)
       setSelectedTag(tag)
+      fn && fn()
     }
   }
   return (
@@ -98,7 +96,7 @@ function Tags() {
             </button>
           </li>
         )}
-        <AddTag onClick={addNewTag}>
+        <AddTag onClick={addTag}>
           <Icon name='add' />
           <span>新建标签</span>
         </AddTag>
