@@ -41,14 +41,20 @@ const TagEditWrapper = styled.div`
         font-size: 18px;
       }
     }
-    .submit {
-      font-size: 18px;
-      border-radius: 10px;
-      background-color: #26b59a;
-      color: #fff;
-      padding: 10px 30px;
-      margin-left: 50%;
-      transform: translate(-50%);
+    .buttonGroup {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10%;
+      .submit, .close {
+        font-size: 18px;
+        border-radius: 10px;
+        background-color: #26b59a;
+        color: #fff;
+        padding: 10px 30px;
+      }
+      .close {
+        background-color: #ababab;
+      }
     }
   }
 `
@@ -74,10 +80,7 @@ const TagEdit: React.FC<Props> = (props) => {
   return (
     <TagEditWrapper className={getClass()}>
       <div className="tagEdit">
-        <TopBar pageTitle='编辑标签' closeIcon={true} onClose={() => {
-          setShowEdit(false)
-          props.onClose(false)
-        }} />
+        <TopBar pageTitle='编辑标签'/>
         <div className="editIcon">
           <label className='legend'>图标</label>
           <Icon name={tag?.iconName} />
@@ -88,7 +91,10 @@ const TagEdit: React.FC<Props> = (props) => {
             updateTag(tag.id, {chinese: e.target.value})
           }} />
         </div>
-        <button className='submit'>确定修改</button>
+        <div className="buttonGroup">
+          <button className='close' onClick={() => {props.onClose(false)}}>取消</button>
+          <button className='submit'>确定修改</button>
+        </div>
       </div>
     </TagEditWrapper>
   )

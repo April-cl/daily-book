@@ -43,18 +43,13 @@ const Wrapper = styled.section`
 
 type Props = {
   pageTitle?: string,
-  returnIcon?: boolean,
-  closeIcon?: boolean,
-  onClose?: () => void
+  returnIcon?: boolean
 }
 
 const TopBar:React.FC<Props> = (props) => {
   const history = useHistory()
   const onClickBack = () => {
     history.goBack()
-  }
-  const onClickClose = () => {
-    props.onClose && props.onClose()
   }
   return (
     <Wrapper>
@@ -71,15 +66,6 @@ const TopBar:React.FC<Props> = (props) => {
       <div className="pageTitle">
         {props.pageTitle}
       </div>
-      {(() => {
-        if (props.closeIcon) {
-          return (
-            <button className="close" onClick={onClickClose}>
-              <Icon name='close' />
-            </button>
-          )
-        }
-      })()}
     </Wrapper>
   )
 }
