@@ -3,7 +3,7 @@ import { createId } from './lib/createId';
 import { useUpdate } from './hooks/useUpdate';
 
 const useTags = () => {
-  const [tags, setTags] = useState<{id: number, iconName: string, chinese: string}[]>([])
+  const [tags, setTags] = useState<Tag[]>([])
   useEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]')
     if (localTags.length === 0) {
@@ -20,9 +20,9 @@ const useTags = () => {
     window.localStorage.setItem('tags', JSON.stringify(tags))
   }, [tags])
   const findTag = (id: number) => {
-    if (id === 0) {
-      return {id: 0, chinese: '', iconName: ''}
-    }
+    // if (id === 0) {
+    //   return {id: 0, chinese: '', iconName: ''}
+    // }
     return tags.filter((tag) => {
       return tag.id === id
     })[0]
@@ -55,9 +55,6 @@ const useTags = () => {
       setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}]);
     }
   };
-  // const addTag = (tagName: string) => {
-  //   setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}])
-  // }
   return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag}
 }
 

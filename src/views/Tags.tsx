@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useTags } from '../useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
-import { createId } from '../lib/createId';
 import { TopBar } from '../components/TopBar';
 import { TagEdit } from './TagEdit';
 
@@ -56,14 +55,11 @@ const AddTag = styled.button`
 function Tags() {
   let [showEdit, setShowEdit] = useState(false)
   let [selectedTag, setSelectedTag] = useState<Tag>({
-    id: createId(),
+    id: 0,
     iconName: 'custom',
     chinese: ''
   })
   const {tags, addTag, deleteTag} = useTags()
-  const addNewTag = () => {
-    toggleEdit({id: createId(), iconName: 'custom', chinese: ''})
-  }
   const toggleEdit = (tag: Tag, fn?: () => void) => {
     if (showEdit) {
       setShowEdit(false)
