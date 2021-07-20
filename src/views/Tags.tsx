@@ -3,7 +3,7 @@ import { useTags } from '../useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
 import { TopBar } from '../components/TopBar';
-import { TagEdit } from './TagEdit';
+import { TagEdit } from './Tags/TagEdit';
 
 const TagList = styled.ul`
   background-color: #fff;
@@ -97,9 +97,10 @@ function Tags() {
           <span>新建标签</span>
         </AddTag>
       </TagList>
-      <TagEdit value={selectedTag} showEdit={showEdit} onClose={(showEdit) => {
-        setShowEdit(showEdit)
-      }} />
+      {/*{selectedTag ? <TagEdit value={selectedTag} showEdit={showEdit} onClose={(showEdit) => {*/}
+      {/*  setShowEdit(showEdit)*/}
+      {/*}} /> : null}*/}
+
     </>
   );
 }
