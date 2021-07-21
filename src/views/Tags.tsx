@@ -4,6 +4,7 @@ import Icon from '../components/Icon';
 import styled from 'styled-components';
 import { TopBar } from '../components/TopBar';
 import { TagEdit } from './Tags/TagEdit';
+import { useModal } from '../hooks/useModal';
 
 const TagList = styled.ul`
   background-color: #fff;
@@ -53,6 +54,7 @@ const AddTag = styled.button`
 `
 
 function Tags() {
+  const { show, hide, RenderModal } = useModal()
   let [showEdit, setShowEdit] = useState(false)
   let [selectedTag, setSelectedTag] = useState<Tag>({
     id: 0,
@@ -96,11 +98,16 @@ function Tags() {
           <Icon name='add' />
           <span>新建标签</span>
         </AddTag>
+        <button onClick={show}>打开</button>
+        <button onClick={hide}>关闭</button>
+        <>
+          <p>这里面的内容将会被渲染到'modal-root'容器里.</p>
+        </>
       </TagList>
       {/*{selectedTag ? <TagEdit value={selectedTag} showEdit={showEdit} onClose={(showEdit) => {*/}
       {/*  setShowEdit(showEdit)*/}
       {/*}} /> : null}*/}
-
+      <div id='modal-root' />
     </>
   );
 }
