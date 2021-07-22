@@ -58,7 +58,7 @@ const TagEdit: React.FC<Props> = (props) => {
           }} />
         </div>
         <div className="buttonGroup">
-          <button className='close' onClick={props.closeModal}>取消</button>
+          <button className='close' onClick={() => {props.closeModal();}}>取消</button>
           <button className='submit'>确定修改</button>
         </div>
     </TagEditWrapper>

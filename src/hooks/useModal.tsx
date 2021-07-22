@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-
 import Modal from 'components/Modal'
+
 
 // Modal组件最基础的两个事件，show/hide
 export const useModal = () => {
@@ -10,9 +10,11 @@ export const useModal = () => {
   const hide = () => setIsVisible(false)
 
   const RenderModal = ({ children }: { children: React.ReactChild }) => (
-    <React.Fragment>
-      {isVisible && <Modal closeModal={hide}>{children}</Modal>}
-    </React.Fragment>
+    <>
+      {isVisible && <Modal closeModal={hide}>{
+        children
+      }</Modal>}
+    </>
   )
 
   return {

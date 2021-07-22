@@ -101,13 +101,9 @@ function Tags() {
         <button onClick={show}>打开</button>
         <button onClick={hide}>关闭</button>
         <RenderModal>
-          {/*<p>这里面的内容将会被渲染到'modal-root'容器里.</p>*/}
-          <TagEdit value={selectedTag} closeModal={()=>{console.log('dainji');}}/>
+          <TagEdit value={selectedTag} closeModal={hide}/>
         </RenderModal>
       </TagList>
-      {/*{selectedTag ? <TagEdit value={selectedTag} showEdit={showEdit} onClose={(showEdit) => {*/}
-      {/*  setShowEdit(showEdit)*/}
-      {/*}} /> : null}*/}
       <div id='modal-root' />
     </>
   );
