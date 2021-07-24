@@ -20,9 +20,6 @@ const useTags = () => {
     window.localStorage.setItem('tags', JSON.stringify(tags))
   }, [tags])
   const findTag = (id: number) => {
-    // if (id === 0) {
-    //   return {id: 0, chinese: '', iconName: ''}
-    // }
     return tags.filter((tag) => {
       return tag.id === id
     })[0]
@@ -49,8 +46,8 @@ const useTags = () => {
     cloneTags.splice(index, 1)
     setTags(cloneTags)
   }
-  const addTag = () => {
-    const tagName = window.prompt('新标签的名称为');
+  const addTag = (tagName: string) => {
+    // const tagName = window.prompt('新标签的名称为');
     if (tagName !== null && tagName !== '') {
       setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}]);
     }

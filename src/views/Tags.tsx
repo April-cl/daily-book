@@ -55,22 +55,14 @@ const AddTag = styled.button`
 
 function Tags() {
   const { show, hide, RenderModal } = useModal()
-  let [showEdit, setShowEdit] = useState(false)
-  let [selectedTag, setSelectedTag] = useState<Tag>({
-    id: 0,
+  const defaultTag = {
+    id: parseInt(window.localStorage.getItem('idMax') || '0') + 1,
     iconName: 'custom',
     chinese: ''
-  })
-  const {tags, addTag, deleteTag} = useTags()
-  const toggleEdit = (tag: Tag, fn?: () => void) => {
-    if (showEdit) {
-      setShowEdit(false)
-    } else {
-      setShowEdit(true)
-      setSelectedTag(tag)
-      fn && fn()
-    }
   }
+  console.log(defaultTag);
+  let [selectedTag, setSelectedTag] = useState<Tag>(defaultTag)
+  const {tags, deleteTag} = useTags()
   return (
     <>
       <TopBar pageTitle={'标签设置'}></TopBar>
@@ -78,7 +70,7 @@ function Tags() {
         {tags.map(tag =>
           <li key={tag.id}>
             {tag.id}
-            <button className='delete' onClick={(e) => {
+            <button className='delete' onClick={() => {
               deleteTag(tag.id)
             }}>
               <Icon name='delete' />
@@ -97,7 +89,10 @@ function Tags() {
             </button>
           </li>
         )}
-        <AddTag onClick={addTag}>
+        <AddTag onClick={() => {
+          setSelectedTag(defaultTag)
+          show();
+        }}>
           <Icon name='add' />
           <span>新建标签</span>
         </AddTag>

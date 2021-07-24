@@ -42,9 +42,17 @@ type Props = {
 }
 
 const TagEdit: React.FC<Props> = (props) => {
-  const {updateTag, findTag} = useTags()
+  const {addTag, updateTag, findTag} = useTags()
   let {id} = props.value
-  const tag = findTag(id)
+  let tag: Tag
+  let option: string
+  if (findTag(id)) {
+    tag = findTag(id)
+    option = 'edit'
+  } else {
+    tag = props.value
+    option = 'add'
+  }
   return (
     <TagEditWrapper>
         <div className="editIcon">
@@ -54,7 +62,11 @@ const TagEdit: React.FC<Props> = (props) => {
         <div className="editName">
           <label>标签名</label>
           <input value={tag?.chinese} onChange={(e) => {
-            updateTag(tag.id, {chinese: e.target.value})
+            if (option === 'edit') {
+              updateTag(tag.id, {chinese: e.target.value})
+            } else if (option === 'add') {
+              addTag(e.target.value)
+            }
           }} />
         </div>
         <div className="buttonGroup">
