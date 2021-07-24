@@ -89,7 +89,10 @@ function Tags() {
               </span>
               <span className='chinese' >{tag.chinese}</span>
             </div>
-            <button className='menu' onClick={(e) => toggleEdit(tag)} >
+            <button className='menu'  onClick={() => {
+              setSelectedTag(tag)
+              show();
+            }} >
               <Icon name='menu' />
             </button>
           </li>
@@ -98,8 +101,6 @@ function Tags() {
           <Icon name='add' />
           <span>新建标签</span>
         </AddTag>
-        <button onClick={show}>打开</button>
-        <button onClick={hide}>关闭</button>
         <RenderModal>
           <TagEdit value={selectedTag} closeModal={hide}/>
         </RenderModal>
