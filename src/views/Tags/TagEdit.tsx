@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTags } from '../../useTags';
 import Icon from '../../components/Icon';
 import styled from 'styled-components';
@@ -42,8 +42,9 @@ type Props = {
 }
 
 const TagEdit: React.FC<Props> = (props) => {
-  const {addTag, updateTag, findTag} = useTags()
+  const {addTag, updateTag, findTag, editTag} = useTags()
   const inputRef = useRef<HTMLInputElement>(null)
+  const [inputValue, setInputValue] = useState(props.value.chinese)
   let {id} = props.value
   let tag: Tag
   let option: string
@@ -62,8 +63,9 @@ const TagEdit: React.FC<Props> = (props) => {
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input ref={inputRef} value={tag?.chinese} onChange={(e) => {
-            updateTag(tag.id, {chinese: e.target.value});
+          <input ref={inputRef} value={inputValue} onChange={(e) => {
+            // editTag(tag.id, {chinese: e.target.value});
+            setInputValue(e.target.value)
           }}/>
         </div>
         <div className="buttonGroup">
