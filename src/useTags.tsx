@@ -34,6 +34,9 @@ const useTags = () => {
     }
     return result
   }
+  const editTag = (tagName: string) => {
+    setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}])
+  }
   const updateTag = (id: number, {chinese}: {chinese: string}) => {
     const index = findTagIndex(id)
     const cloneTags = JSON.parse(JSON.stringify(tags))
@@ -47,12 +50,12 @@ const useTags = () => {
     setTags(cloneTags)
   }
   const addTag = (tagName: string) => {
-    // const tagName = window.prompt('新标签的名称为');
+    console.log('addTag');
     if (tagName !== null && tagName !== '') {
       setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}]);
     }
   };
-  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag}
+  return {tags, setTags, findTag, findTagIndex, editTag, updateTag, deleteTag, addTag}
 }
 
 export {useTags}

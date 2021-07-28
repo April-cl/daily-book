@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Modal from 'components/Modal'
 
-
 // Modal组件最基础的两个事件，show/hide
 export const useModal = () => {
   const [isVisible, setIsVisible] = useState(false)

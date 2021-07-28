@@ -60,7 +60,6 @@ function Tags() {
     iconName: 'custom',
     chinese: ''
   }
-  console.log(defaultTag);
   let [selectedTag, setSelectedTag] = useState<Tag>(defaultTag)
   const {tags, deleteTag} = useTags()
   return (

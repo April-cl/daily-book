@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTags } from '../../useTags';
 import Icon from '../../components/Icon';
 import styled from 'styled-components';
@@ -42,7 +42,8 @@ type Props = {
 }
 
 const TagEdit: React.FC<Props> = (props) => {
-  const {addTag, updateTag, findTag} = useTags()
+  const {addTag, editTag, updateTag, findTag} = useTags()
+  const inputRef = useRef<HTMLInputElement>(null)
   let {id} = props.value
   let tag: Tag
   let option: string
@@ -61,17 +62,28 @@ const TagEdit: React.FC<Props> = (props) => {
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input value={tag?.chinese} onChange={(e) => {
-            if (option === 'edit') {
-              updateTag(tag.id, {chinese: e.target.value})
-            } else if (option === 'add') {
-              addTag(e.target.value)
-            }
-          }} />
+          <input defaultValue={tag?.chinese} ref={inputRef}/>
+          {/*<input value={tag?.chinese} onChange={(e) => {*/}
+          {/*  if (option === 'edit') {*/}
+          {/*    updateTag(tag.id, {chinese: e.target.value})*/}
+          {/*  } else if (option === 'add') {*/}
+          {/*    editTag(e.target.value)*/}
+          {/*    // addTag(e.target.value)*/}
+          {/*  }*/}
+          {/*}} />*/}
         </div>
         <div className="buttonGroup">
           <button className='close' onClick={() => {props.closeModal();}}>取消</button>
-          <button className='submit'>确定修改</button>
+          <button className='submit' onClick={() => {
+            if (inputRef.current) {
+              if (option === 'edit') {
+                updateTag(tag.id, {chinese: inputRef.current.value})
+              } else if (option === 'add') {
+                addTag(inputRef.current.value)
+              }
+            }
+            props.closeModal();
+          }}>确定修改</button>
         </div>
     </TagEditWrapper>
   )
