@@ -42,7 +42,7 @@ type Props = {
 }
 
 const TagEdit: React.FC<Props> = (props) => {
-  const {addTag, editTag, updateTag, findTag} = useTags()
+  const {addTag, updateTag, findTag} = useTags()
   const inputRef = useRef<HTMLInputElement>(null)
   let {id} = props.value
   let tag: Tag
@@ -62,15 +62,9 @@ const TagEdit: React.FC<Props> = (props) => {
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input defaultValue={tag?.chinese} ref={inputRef}/>
-          {/*<input value={tag?.chinese} onChange={(e) => {*/}
-          {/*  if (option === 'edit') {*/}
-          {/*    updateTag(tag.id, {chinese: e.target.value})*/}
-          {/*  } else if (option === 'add') {*/}
-          {/*    editTag(e.target.value)*/}
-          {/*    // addTag(e.target.value)*/}
-          {/*  }*/}
-          {/*}} />*/}
+          <input ref={inputRef} value={tag?.chinese} onChange={(e) => {
+            updateTag(tag.id, {chinese: e.target.value});
+          }}/>
         </div>
         <div className="buttonGroup">
           <button className='close' onClick={() => {props.closeModal();}}>取消</button>
@@ -79,6 +73,7 @@ const TagEdit: React.FC<Props> = (props) => {
               if (option === 'edit') {
                 updateTag(tag.id, {chinese: inputRef.current.value})
               } else if (option === 'add') {
+                console.log(inputRef.current.value);
                 addTag(inputRef.current.value)
               }
             }
