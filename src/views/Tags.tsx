@@ -68,7 +68,6 @@ function Tags() {
       <TagList>
         {tags.map(tag =>
           <li key={tag.id}>
-            {tag.id}
             <button className='delete' onClick={() => {
               deleteTag(tag.id)
             }}>
