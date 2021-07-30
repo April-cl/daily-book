@@ -42,8 +42,7 @@ type Props = {
 }
 
 const TagEdit: React.FC<Props> = (props) => {
-  const {addTag, updateTag, findTag, editTag} = useTags()
-  const inputRef = useRef<HTMLInputElement>(null)
+  const {addTag, updateTag, findTag} = useTags()
   const [inputValue, setInputValue] = useState(props.value.chinese)
   let {id} = props.value
   let tag: Tag
@@ -63,23 +62,21 @@ const TagEdit: React.FC<Props> = (props) => {
         </div>
         <div className="editName">
           <label>标签名</label>
-          <input ref={inputRef} value={inputValue} onChange={(e) => {
-            // editTag(tag.id, {chinese: e.target.value});
+          <input value={inputValue} onChange={(e) => {
             setInputValue(e.target.value)
           }}/>
         </div>
         <div className="buttonGroup">
           <button className='close' onClick={() => {props.closeModal();}}>取消</button>
           <button className='submit' onClick={() => {
-            if (inputRef.current) {
-              if (option === 'edit') {
-                updateTag(tag.id, {chinese: inputRef.current.value})
-              } else if (option === 'add') {
-                console.log(inputRef.current.value);
-                addTag(inputRef.current.value)
-              }
+            if (option === 'edit') {
+              updateTag(tag.id, inputValue)
+            } else if (option === 'add') {
+              addTag(inputValue)
             }
-            props.closeModal();
+            setTimeout(() => {
+              props.closeModal()
+            }, 0)
           }}>确定修改</button>
         </div>
     </TagEditWrapper>

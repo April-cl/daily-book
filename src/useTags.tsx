@@ -34,16 +34,13 @@ const useTags = () => {
     }
     return result
   }
-  const editTag = (id: number, {chinese}: { chinese: string }) => {
-    console.log(!findTag(id));
-    if (!findTag(id)) {
-      console.log(id);
-      addTag(chinese)
-    }
-    setTags(tags.map(tag => tag.id === id ? {...tag, chinese} : tag));
-  }
-  const updateTag = (id: number, {chinese}: { chinese: string }) => {
-    setTags(tags.map(tag => tag.id === id ? {...tag, chinese} : tag));
+  const updateTag = (id: number, chinese: string) => {
+    setTags(tags.map((tag) => {
+      if (tag.id === id) {
+        tag = {...tag, chinese}
+      }
+      return tag
+    }));
   }
   const deleteTag = (id: number) => {
     const index = findTagIndex(id)
@@ -52,11 +49,9 @@ const useTags = () => {
     setTags(cloneTags)
   }
   const addTag = (chinese: string) => {
-    if (chinese !== null && chinese !== '') {
-      setTags([...tags, {id: createId(), iconName: 'custom', chinese: chinese}]);
-    }
+    setTags([...tags, {id: createId(), iconName: 'custom', chinese: chinese}]);
   };
-  return {tags, setTags, findTag, findTagIndex, editTag, updateTag, deleteTag, addTag}
+  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag}
 }
 
 export {useTags}
