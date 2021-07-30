@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-import Icon from '../../components/Icon';
-import { useTags } from '../../useTags';
-import { createId } from '../../lib/createId';
+import Icon from 'components/Icon';
+import { useTags } from 'hooks/useTags';
+import { createId } from 'lib/createId';
 
 const Wrapper = styled.section`
   background-color: #fff;

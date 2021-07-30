@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTags } from '../useTags';
+import { useTags } from '../hooks/useTags';
 import Icon from '../components/Icon';
 import styled from 'styled-components';
 import { TopBar } from '../components/TopBar';
