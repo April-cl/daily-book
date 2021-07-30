@@ -76,6 +76,7 @@ const TagEdit: React.FC<Props> = (props) => {
             }
             setTimeout(() => {
               props.closeModal()
+              window.location.reload()
             }, 0)
           }}>确定修改</button>
         </div>
