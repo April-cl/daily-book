@@ -13,17 +13,15 @@ const EditLayout = styled(Layout)`
     flex-direction: column;
 `
 
-type Category = '-' | '+'
-
 function Edit() {
   const [record, setRecord] = useState({
     category: '-' as Category,
     tag: {id: 0, chinese: ''},
     note: '',
     amount: 0,
-    output: '0',
     createAt: (new Date()).toISOString()
   })
+  const [output, setOutput] = useState('0')
   const onChange = (obj: Partial<typeof record>) => {
     setRecord({
       ...record,
@@ -33,11 +31,14 @@ function Edit() {
   return (
     <EditLayout>
       <CategorySection value={record.category} onChange={(category) => {onChange({category})}} />
-      <OutputSection output = {record.output} tag = {record.tag.chinese} />
+      <OutputSection output = {output} tag = {record.tag.chinese} />
       <TagsSection value={record.tag} onChange={(tag) => {onChange({tag})}} />
       <DateSection value = {record.createAt} onChange={(createAt) => {onChange({createAt});}} />
       <NotesSection value={record.note} onChange={(note: string) => {onChange({note})}} />
-      <NumberPadSection value={record.amount} onChange={(amount, output) => {onChange({amount, output})}} />
+      <NumberPadSection value={record.amount} onChange={(amount, output) => {
+        onChange({amount})
+        setOutput(output)
+      }} />
     </EditLayout>
   );
 }
