@@ -8,6 +8,9 @@ import { NotesSection } from './Edit/NotesSection';
 import { NumberPadSection } from './Edit/NumberPadSection';
 import { TagsSection } from './Edit/TagsSection';
 import { useRecords } from '../hooks/useRecords';
+import { TagEdit } from './Tags/TagEdit';
+import { useModal } from '../hooks/useModal';
+import { Tooltip } from '../components/Tooltip';
 
 const EditLayout = styled(Layout)`
     display:flex;
