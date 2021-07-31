@@ -7,20 +7,24 @@ import { DateSection } from './Edit/DateSection';
 import { NotesSection } from './Edit/NotesSection';
 import { NumberPadSection } from './Edit/NumberPadSection';
 import { TagsSection } from './Edit/TagsSection';
+import { useRecords } from '../hooks/useRecords';
 
 const EditLayout = styled(Layout)`
     display:flex;
     flex-direction: column;
 `
 
+const defaultRecord: RecordItem = {
+  category: '-' as Category,
+  tag: {id:0, chinese:'', iconName:''},
+  note: '',
+  amount: 0,
+  createAt: (new Date()).toISOString()
+}
+
 function Edit() {
-  const [record, setRecord] = useState({
-    category: '-' as Category,
-    tag: {id: 0, chinese: ''},
-    note: '',
-    amount: 0,
-    createAt: (new Date()).toISOString()
-  })
+  const [record, setRecord] = useState(defaultRecord)
+  const {addRecord} = useRecords()
   const [output, setOutput] = useState('0')
   const onChange = (obj: Partial<typeof record>) => {
     setRecord({
@@ -28,8 +32,13 @@ function Edit() {
       ...obj
     })
   }
+  const submit = () => {
+    addRecord(record)
+    setRecord(defaultRecord)
+  }
   return (
     <EditLayout>
+      {JSON.stringify(record)}
       <CategorySection value={record.category} onChange={(category) => {onChange({category})}} />
       <OutputSection output = {output} tag = {record.tag.chinese} />
       <TagsSection value={record.tag} onChange={(tag) => {onChange({tag})}} />
@@ -38,7 +47,7 @@ function Edit() {
       <NumberPadSection value={record.amount} onChange={(amount, output) => {
         onChange({amount})
         setOutput(output)
-      }} />
+      }} onOk={submit} />
     </EditLayout>
   );
 }

@@ -42,8 +42,8 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-  value: {id: number, chinese: string},
-  onChange: (value: {id: number, chinese: string}) => void
+  value: Tag,
+  onChange: (value: Tag) => void
 }
 
 const TagsSection: React.FC<Props> = (props) => {
