@@ -8,7 +8,6 @@ import { NotesSection } from './Edit/NotesSection';
 import { NumberPadSection } from './Edit/NumberPadSection';
 import { TagsSection } from './Edit/TagsSection';
 import { useRecords } from '../hooks/useRecords';
-import { TagEdit } from './Tags/TagEdit';
 import { useModal } from '../hooks/useModal';
 import { Tooltip } from '../components/Tooltip';
 
@@ -26,6 +25,8 @@ const defaultRecord: RecordItem = {
 }
 
 function Edit() {
+  const { show, hide, RenderModal } = useModal()
+  const [caption, setCaption] = useState('')
   const [record, setRecord] = useState(defaultRecord)
   const {addRecord} = useRecords()
   const [output, setOutput] = useState('0')
@@ -36,22 +37,34 @@ function Edit() {
     })
   }
   const submit = () => {
-    addRecord(record)
-    setRecord(defaultRecord)
+    show()
+    const resultNumber = addRecord(record)
+    if (resultNumber === 0) {
+      setRecord(defaultRecord)
+      setCaption('记下啦~~~')
+    } else if (resultNumber === 1) {
+      setCaption('金额还没写呢！')
+    } else if (resultNumber === 2) {
+      setCaption('标签还没选呢！')
+    }
   }
   return (
-    <EditLayout>
-      {JSON.stringify(record)}
-      <CategorySection value={record.category} onChange={(category) => {onChange({category})}} />
-      <OutputSection output = {output} tag = {record.tag.chinese} />
-      <TagsSection value={record.tag} onChange={(tag) => {onChange({tag})}} />
-      <DateSection value = {record.createAt} onChange={(createAt) => {onChange({createAt});}} />
-      <NotesSection value={record.note} onChange={(note: string) => {onChange({note})}} />
-      <NumberPadSection value={record.amount} onChange={(amount, output) => {
-        onChange({amount})
-        setOutput(output)
-      }} onOk={submit} />
-    </EditLayout>
+    <>
+      <EditLayout>
+        <CategorySection value={record.category} onChange={(category) => {onChange({category})}} />
+        <OutputSection output = {output} tag = {record.tag.chinese} />
+        <TagsSection value={record.tag} onChange={(tag) => {onChange({tag})}} />
+        <DateSection value = {record.createAt} onChange={(createAt) => {onChange({createAt});}} />
+        <NotesSection value={record.note} onChange={(note: string) => {onChange({note})}} />
+        <NumberPadSection value={record.amount} onChange={(amount, output) => {
+          onChange({amount})
+          setOutput(output)
+        }} onOk={submit} />
+      </EditLayout>
+      <RenderModal modalTitle='提交结果'>
+        <Tooltip closeModal={hide} caption={caption}/>
+      </RenderModal>
+    </>
   );
 }
 

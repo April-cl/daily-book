@@ -11,13 +11,13 @@ export const useRecords = () => {
   }, [records])
   const addRecord = (record: RecordItem) => {
     if (record.amount <= 0) {
-      return '金额还没写呢！'
+      return 1
     }
     if (record.tag.id === 0) {
-      return '标签还没选呢！'
+      return 2
     }
     setRecords([...records, record])
-    return '小的记下啦~'
+    return 0
   }
   return {records, addRecord}
 }

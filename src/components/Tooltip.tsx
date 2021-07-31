@@ -1,11 +1,11 @@
 import React from 'react';
-import { TopBar } from './TopBar';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   text-align: center;
   .caption {
     width: 100%;
+    margin: 10px 0;
   }
   .closeButton {
     font-size: 18px;
