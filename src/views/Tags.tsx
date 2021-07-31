@@ -56,6 +56,7 @@ const AddTag = styled.button`
 function Tags() {
   const { show, hide, RenderModal } = useModal()
   let [selectedTag, setSelectedTag] = useState<Tag | null>(null)
+  const [modalTitle, setModalTitle] = useState('编辑标签')
   const {tags, deleteTag} = useTags()
   return (
     <>
@@ -76,6 +77,7 @@ function Tags() {
             </div>
             <button className='menu'  onClick={() => {
               setSelectedTag(tag)
+              setModalTitle('编辑标签')
               show();
             }} >
               <Icon name='menu' />
@@ -84,12 +86,13 @@ function Tags() {
         )}
         <AddTag onClick={() => {
           setSelectedTag(null)
+          setModalTitle('新建标签')
           show();
         }}>
           <Icon name='add' />
           <span>新建标签</span>
         </AddTag>
-        <RenderModal>
+        <RenderModal modalTitle={modalTitle}>
           <TagEdit value={selectedTag} closeModal={hide}/>
         </RenderModal>
       </TagList>

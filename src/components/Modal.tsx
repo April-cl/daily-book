@@ -16,7 +16,7 @@ const ModalWrapper = styled.div`
     top: 50%;
     left: 50%;
     width: 80%;
-    height: 60%;
+    padding-bottom: 20px;
     transform: translate(-50%, -50%);
     background-color:  #f0eff4;
     font-size: 18px;
@@ -24,11 +24,12 @@ const ModalWrapper = styled.div`
 `
 
 type Props = {
+  modalTitle: string
   children: React.ReactChild
   closeModal: () => void
 }
 
-const Modal = React.memo(({ children, closeModal }: Props) => {
+const Modal = React.memo(({modalTitle, children, closeModal }: Props) => {
   const domEl = document.getElementById('modal-root')
 
   if (!domEl) return null
@@ -36,7 +37,7 @@ const Modal = React.memo(({ children, closeModal }: Props) => {
     <ModalWrapper>
       <div className="modal">
         <div className="tagEdit">
-          <TopBar pageTitle='编辑标签'/>
+          <TopBar pageTitle={modalTitle}/>
           {children}
         </div>
       </div>

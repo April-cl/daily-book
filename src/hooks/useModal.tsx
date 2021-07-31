@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import Modal from 'components/Modal'
 
-// Modal组件最基础的两个事件，show/hide
 export const useModal = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   const show = () => setIsVisible(true)
   const hide = () => setIsVisible(false)
 
-  const RenderModal = ({ children }: { children: React.ReactChild }) => (
+  const RenderModal = ({ children, modalTitle }: { children: React.ReactChild, modalTitle: string }) => (
     <>
-      {isVisible && <Modal closeModal={hide}>{
+      {isVisible && <Modal modalTitle={modalTitle} closeModal={hide}>{
         children
       }</Modal>}
     </>

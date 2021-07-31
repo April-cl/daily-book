@@ -71,14 +71,14 @@ const TagsSection: React.FC<Props> = (props) => {
             })
           }
           <li onClick={() => {show()}}>
-          <span className="iconWrapper">
-          <Icon name="add"/>
-          </span>
+            <span className="iconWrapper">
+              <Icon name="add"/>
+            </span>
             <span>新增标签</span>
           </li>
         </ul>
       </Wrapper>
-      <RenderModal>
+      <RenderModal modalTitle='新建标签'>
         <TagEdit value={null} closeModal={hide}/>
       </RenderModal>
     </>

@@ -63,30 +63,30 @@ const TagEdit: React.FC<Props> = (props) => {
   }, [tag.chinese])
   return (
     <TagEditWrapper>
-        <div className="editIcon">
-          <label className='legend'>图标</label>
-          <Icon name={tag?.iconName} />
-        </div>
-        <div className="editName">
-          <label>标签名</label>
-          <input value={inputValue} onChange={(e) => {
-            setInputValue(e.target.value)
-          }}/>
-        </div>
-        <div className="buttonGroup">
-          <button className='close' onClick={() => {props.closeModal();}}>取消</button>
-          <button className='submit' onClick={() => {
-            if (option === 'edit') {
-              updateTag(tag.id, inputValue)
-            } else if (option === 'add') {
-              addTag(inputValue)
-            }
-            setTimeout(() => {
-              props.closeModal()
-              window.location.reload()
-            }, 0)
-          }}>确定修改</button>
-        </div>
+      <div className="editIcon">
+        <label className='legend'>图标</label>
+        <Icon name={tag?.iconName} />
+      </div>
+      <div className="editName">
+        <label>标签名</label>
+        <input value={inputValue} onChange={(e) => {
+          setInputValue(e.target.value)
+        }}/>
+      </div>
+      <div className="buttonGroup">
+        <button className='close' onClick={() => {props.closeModal();}}>取消</button>
+        <button className='submit' onClick={() => {
+          if (option === 'edit') {
+            updateTag(tag.id, inputValue)
+          } else if (option === 'add') {
+            addTag(inputValue)
+          }
+          setTimeout(() => {
+            props.closeModal()
+            window.location.reload()
+          }, 0)
+        }}>确定修改</button>
+      </div>
     </TagEditWrapper>
   )
 }

@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Wrapper } from './NumberPadSection/Wrapper';
 import { generateOutput } from './NumberPadSection/generateOutput';
+import { Tooltip } from '../../components/Tooltip';
+import { useModal } from '../../hooks/useModal';
 
 type Props = {
   value: number,
   onChange: (value: number, output: string) => void,
-  onOk?: () => void
+  onOk: () => void
 }
 
 const NumberPadSection: React.FC<Props> = (props) => {
+  const { show, hide, RenderModal } = useModal()
   const [output, _setOutput] = useState(props.value.toString())
   const setOutput = (output: string) => {
     let newOutput: string;
@@ -27,6 +30,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === null) {return}
     if (text === 'OK') {
       if (props.onOk) {
+        show()
         props.onOk()
       }
       return
@@ -53,6 +57,10 @@ const NumberPadSection: React.FC<Props> = (props) => {
         <button className="dot">.</button>
         <button className="zero">0</button>
       </div>
+
+      <RenderModal modalTitle='提交结果'>
+        <Tooltip closeModal={hide} caption={'保存成功'}/>
+      </RenderModal>
     </Wrapper>
   )
 }
