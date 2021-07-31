@@ -59,7 +59,7 @@ function Tags() {
   const {tags, deleteTag} = useTags()
   return (
     <>
-      <TopBar pageTitle={'标签设置'}></TopBar>
+      <TopBar pageTitle={'标签设置'} returnIcon={true}></TopBar>
       <TagList>
         {tags.map(tag =>
           <li key={tag.id}>
