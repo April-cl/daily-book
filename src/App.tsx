@@ -12,23 +12,26 @@ import { NoMatch } from './views/NoMatch';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/tags">
-          <Tags />
-        </Route>
-        <Route exact path="/edit">
-          <Edit />
-        </Route>
-        <Route exact path="/statistics">
-          <Statistics />
-        </Route>
-        <Redirect exact from='/' to='/tags'></Redirect>
-        <Route path='*'>
-          <NoMatch />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      <Router>
+        <Switch>
+          <Route exact path="/tags">
+            <Tags />
+          </Route>
+          <Route exact path="/edit">
+            <Edit />
+          </Route>
+          <Route exact path="/statistics">
+            <Statistics />
+          </Route>
+          <Redirect exact from='/' to='/edit'></Redirect>
+          <Route path='*'>
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Router>
+      <div id='modal-root' />
+    </>
   );
 }
 

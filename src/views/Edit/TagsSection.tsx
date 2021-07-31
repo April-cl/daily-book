@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import React from 'react';
 import Icon from 'components/Icon';
 import { useTags } from 'hooks/useTags';
-import { createId } from 'lib/createId';
+import { TagEdit } from '../Tags/TagEdit';
+import { useModal } from '../../hooks/useModal';
 
 const Wrapper = styled.section`
   background-color: #fff;
@@ -46,41 +47,41 @@ type Props = {
 }
 
 const TagsSection: React.FC<Props> = (props) => {
-  const {tags, setTags, addTag} = useTags()
+  const { show, hide, RenderModal } = useModal()
+  const {tags} = useTags()
   const selectedTagId = props.value.id
-  const addNewTag = () => {
-    const tagName = window.prompt('请输入新标签名字：')
-    if (tagName !== null) {
-      setTags([...tags, {id: createId(), iconName: 'custom', chinese: tagName}])
-    }
-  }
   const onToggleTag = (tag: any) => {
     props.onChange(selectedTagId === tag.id ? {} : tag)
   }
   const getClass = (tagId: number) => {return selectedTagId === tagId? 'selected' : ''}
   return (
-    <Wrapper>
-      <ul>
-        {
-          tags.map((tag) => {
-            return (
-              <li key={tag.chinese} onClick={() => onToggleTag(tag)} className={getClass(tag.id)}>
+    <>
+      <Wrapper>
+        <ul>
+          {
+            tags.map((tag) => {
+              return (
+                <li key={tag.chinese} onClick={() => onToggleTag(tag)} className={getClass(tag.id)}>
                 <span className="iconWrapper">
                 <Icon name={tag.iconName}/>
                 </span>
-                <span>{tag.chinese}</span>
-              </li>
-            )
-          })
-        }
-        <li onClick={addNewTag}>
+                  <span>{tag.chinese}</span>
+                </li>
+              )
+            })
+          }
+          <li onClick={() => {show()}}>
           <span className="iconWrapper">
           <Icon name="add"/>
           </span>
-          <span>新增标签</span>
-        </li>
-      </ul>
-    </Wrapper>
+            <span>新增标签</span>
+          </li>
+        </ul>
+      </Wrapper>
+      <RenderModal>
+        <TagEdit value={null} closeModal={hide}/>
+      </RenderModal>
+    </>
   )
 }
 

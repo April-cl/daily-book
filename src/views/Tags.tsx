@@ -55,11 +55,6 @@ const AddTag = styled.button`
 
 function Tags() {
   const { show, hide, RenderModal } = useModal()
-  const defaultTag = {
-    id: parseInt(window.localStorage.getItem('idMax') || '0') + 1,
-    iconName: 'custom',
-    chinese: ''
-  }
   let [selectedTag, setSelectedTag] = useState<Tag | null>(null)
   const {tags, deleteTag} = useTags()
   return (
@@ -98,7 +93,6 @@ function Tags() {
           <TagEdit value={selectedTag} closeModal={hide}/>
         </RenderModal>
       </TagList>
-      <div id='modal-root' />
     </>
   );
 }
