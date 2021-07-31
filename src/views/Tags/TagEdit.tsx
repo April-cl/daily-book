@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTags } from 'hooks/useTags';
 import Icon from 'components/Icon';
 import styled from 'styled-components';
@@ -37,23 +37,30 @@ const TagEditWrapper = styled.div`
 `
 
 type Props = {
-  value: Tag,
+  value: Tag | null,
   closeModal: () => void
 }
 
 const TagEdit: React.FC<Props> = (props) => {
+  const newTag = {
+    id: parseInt(window.localStorage.getItem('idMax') || '0') + 1,
+    iconName: 'custom',
+    chinese: ''
+  }
   const {addTag, updateTag, findTag} = useTags()
-  const [inputValue, setInputValue] = useState(props.value.chinese)
-  let {id} = props.value
   let tag: Tag
   let option: string
-  if (findTag(id)) {
-    tag = findTag(id)
+  if (props.value && findTag(props.value.id)) {
+    tag = findTag(props.value.id)
     option = 'edit'
   } else {
-    tag = props.value
+    tag = newTag
     option = 'add'
   }
+  const [inputValue, setInputValue] = useState(tag.chinese)
+  useEffect(() => {
+    setInputValue(tag.chinese)
+  }, [tag.chinese])
   return (
     <TagEditWrapper>
         <div className="editIcon">

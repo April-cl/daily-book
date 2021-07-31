@@ -60,7 +60,7 @@ function Tags() {
     iconName: 'custom',
     chinese: ''
   }
-  let [selectedTag, setSelectedTag] = useState<Tag>(defaultTag)
+  let [selectedTag, setSelectedTag] = useState<Tag | null>(null)
   const {tags, deleteTag} = useTags()
   return (
     <>
@@ -88,7 +88,7 @@ function Tags() {
           </li>
         )}
         <AddTag onClick={() => {
-          setSelectedTag(defaultTag)
+          setSelectedTag(null)
           show();
         }}>
           <Icon name='add' />
