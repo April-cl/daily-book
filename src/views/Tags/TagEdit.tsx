@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { useTags } from '../../hooks/useTags';
-import Icon from '../../components/Icon';
+import React, { useState } from 'react';
+import { useTags } from 'hooks/useTags';
+import Icon from 'components/Icon';
 import styled from 'styled-components';
 
 const TagEditWrapper = styled.div`

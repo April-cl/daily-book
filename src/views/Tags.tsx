@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useTags } from '../hooks/useTags';
-import Icon from '../components/Icon';
+import { useTags } from 'hooks/useTags';
+import Icon from 'components/Icon';
 import styled from 'styled-components';
-import { TopBar } from '../components/TopBar';
+import { TopBar } from 'components/TopBar';
 import { TagEdit } from './Tags/TagEdit';
-import { useModal } from '../hooks/useModal';
+import { useModal } from 'hooks/useModal';
 
 const TagList = styled.ul`
   background-color: #fff;
