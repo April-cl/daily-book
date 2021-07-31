@@ -26,7 +26,7 @@ const defaultRecord: RecordItem = {
 
 function Edit() {
   const { show, hide, RenderModal } = useModal()
-  const [caption, setCaption] = useState('')
+  const [content, setContent] = useState('')
   const [record, setRecord] = useState(defaultRecord)
   const {addRecord} = useRecords()
   const [output, setOutput] = useState('0')
@@ -41,11 +41,11 @@ function Edit() {
     const resultNumber = addRecord(record)
     if (resultNumber === 0) {
       setRecord(defaultRecord)
-      setCaption('记下啦~~~')
+      setContent('记下啦~~~')
     } else if (resultNumber === 1) {
-      setCaption('金额还没写呢！')
+      setContent('金额还没写呢！')
     } else if (resultNumber === 2) {
-      setCaption('标签还没选呢！')
+      setContent('标签还没选呢！')
     }
   }
   return (
@@ -62,7 +62,7 @@ function Edit() {
         }} onOk={submit} />
       </EditLayout>
       <RenderModal modalTitle='提交结果'>
-        <Tooltip closeModal={hide} caption={caption}/>
+        <Tooltip closeModal={hide} content={content}/>
       </RenderModal>
     </>
   );
