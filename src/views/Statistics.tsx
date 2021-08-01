@@ -4,14 +4,19 @@ import { CategorySection } from './Edit/CategorySection';
 import { useRecords } from '../hooks/useRecords';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
+import Icon from '../components/Icon';
 
 const RecordItem = styled.div`
   display:flex;
+  align-items: center;
   justify-content: space-between;
   background: white;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 20px;
   padding: 10px 16px;
+  > .tagName {
+    margin-left: 5px;
+  }
   > .note{
     margin-right: auto;
     margin-left: 16px;
@@ -23,6 +28,9 @@ const Header = styled.div`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
+  > .total {
+    position: absolute;right: 16px;
+  }
 `
 
 function Statistics() {
@@ -48,7 +56,7 @@ function Statistics() {
     if (!(key in hash)) {
       hash[key] = []
     }
-    hash[key].push(record)
+    return hash[key].push(record)
   })
   const hashArray = Object.entries(hash).sort((a, b) => {
     if (a[0] === b[0]) return 0
@@ -63,12 +71,16 @@ function Statistics() {
           <div key={date}>
             <Header>
               {date}
+              <span className='total'>￥{records.reduce((sum, item) => {
+                return sum + item.amount;
+              }, 0)}</span>
             </Header>
             <div>
               {records.map(record => {
                 return (
                   <RecordItem key={records.indexOf(record)}>
-                    <span className="tag">{record.tag.chinese}</span>
+                    <Icon name={record.tag.iconName} />
+                    <span className="tagName">{record.tag.chinese}</span>
                     <span className='note'>{record.note}</span>
                     <span className='amount'>￥{record.amount}</span>
                   </RecordItem>
