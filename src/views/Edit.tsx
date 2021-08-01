@@ -41,6 +41,7 @@ function Edit() {
     const resultNumber = addRecord(record)
     if (resultNumber === 0) {
       setRecord(defaultRecord)
+      setOutput('0')
       setContent('记下啦~~~')
     } else if (resultNumber === 1) {
       setContent('金额还没写呢！')
