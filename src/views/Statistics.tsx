@@ -13,30 +13,57 @@ const RecordItem = styled.div`
   line-height: 20px;
   padding: 10px 16px;
   > .note{
-    //margin-right: auto;
+    margin-right: auto;
     margin-left: 16px;
     color: #999;
   }
 `
 
+const Header = styled.div`
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px 16px;
+`
+
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-')
   const {records} = useRecords()
+  const hash: {[Key: string]: RecordItem[]} = {}
+  const selectedRecords = records.filter(record => record.category === category)
+  selectedRecords.map(record => {
+    const key = dayjs(record.createAt).format('YYYY年M月D日')
+    if (!(key in hash)) {
+      hash[key] = []
+    }
+    hash[key].push(record)
+  })
+  const hashArray = Object.entries(hash).sort((a, b) => {
+    if (a[0] === b[0]) return 0
+    if (a[0] > b[0]) return -1
+    return 1
+  })
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
-      <div>
-        {records.map(record => {
-          return (
-            <RecordItem key={records.indexOf(record)}>
-              <span className="tag">{record.tag.chinese}</span>
-              <span className='note'>{record.note}</span>
-              <span className='amount'>￥{record.amount}</span>
-              <span>{dayjs(record.createAt).format('YYYY年M月D日')}</span>
-            </RecordItem>
-          )
-        })}
-      </div>
+      {hashArray.map(([date, records]) => {
+        return (
+          <div key={date}>
+            <Header>
+              {date}
+            </Header>
+            <div>
+              {records.map(record => {
+                return (
+                  <RecordItem key={records.indexOf(record)}>
+                    <span className="tag">{record.tag.chinese}</span>
+                    <span className='note'>{record.note}</span>
+                    <span className='amount'>￥{record.amount}</span>
+                  </RecordItem>
+                )
+              })}
+            </div>
+          </div>)
+      })}
     </Layout>
   );
 }
