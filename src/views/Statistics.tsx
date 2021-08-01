@@ -28,10 +28,23 @@ const Header = styled.div`
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-')
   const {records} = useRecords()
+  const beautify = (string: string) => {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (day.isSame(now, "day")) {
+      return "今天";
+    } else if (day.isSame(now.subtract(1, "day"), "day")) {
+      return "昨天";
+    } else if (day.isSame(now, "year")) {
+      return day.format("M月D日");
+    } else {
+      return day.format("YYYY年M月D日");
+    }
+  }
   const hash: {[Key: string]: RecordItem[]} = {}
   const selectedRecords = records.filter(record => record.category === category)
   selectedRecords.map(record => {
-    const key = dayjs(record.createAt).format('YYYY年M月D日')
+    const key = beautify(record.createAt)
     if (!(key in hash)) {
       hash[key] = []
     }
@@ -39,8 +52,8 @@ function Statistics() {
   })
   const hashArray = Object.entries(hash).sort((a, b) => {
     if (a[0] === b[0]) return 0
-    if (a[0] > b[0]) return -1
-    return 1
+    if (a[0] > b[0]) return 1
+    return -1
   })
   return (
     <Layout>

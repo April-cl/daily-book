@@ -43,10 +43,7 @@ const useTags = () => {
     }));
   }
   const deleteTag = (id: number) => {
-    const index = findTagIndex(id)
-    const cloneTags = JSON.parse(JSON.stringify(tags))
-    cloneTags.splice(index, 1)
-    setTags(cloneTags)
+    setTags(tags.filter(tag => tag.id !== id))
   }
   const addTag = (chinese: string) => {
     setTags([...tags, {id: createId(), iconName: 'custom', chinese: chinese}]);
