@@ -22,7 +22,7 @@ const defaultRecord: RecordItem = {
   tag: {id:0, chinese:'', iconName:''},
   note: '',
   amount: 0,
-  createAt: (new Date()).toISOString()
+  createAt: ''
 }
 
 function Edit() {
