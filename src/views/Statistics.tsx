@@ -52,17 +52,16 @@ function Statistics() {
   const hash: {[Key: string]: RecordItem[]} = {}
   const selectedRecords = records.filter(record => record.category === category)
   selectedRecords.map(record => {
-    const key = beautify(record.createAt)
+    const key = record.createAt
     if (!(key in hash)) {
       hash[key] = []
     }
     return hash[key].push(record)
   })
   const hashArray = Object.entries(hash).sort((a, b) => {
-    if (a[0] === b[0]) return 0
-    if (a[0] > b[0]) return 1
-    return -1
+    return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
+  console.log(hashArray);
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
@@ -70,7 +69,7 @@ function Statistics() {
         return (
           <div key={date}>
             <Header>
-              {date}
+              {beautify(date)}
               <span className='total'>￥{records.reduce((sum, item) => {
                 return sum + item.amount;
               }, 0)}</span>
