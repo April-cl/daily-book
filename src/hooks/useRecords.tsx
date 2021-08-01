@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useUpdate } from './useUpdate';
+import { createRecordId } from '../lib/createId';
 
 export const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([])
@@ -16,8 +17,11 @@ export const useRecords = () => {
     if (record.tag.id === 0) {
       return 2
     }
-    setRecords([...records, record])
+    setRecords([...records, {...record, id: createRecordId()}])
     return 0
   }
-  return {records, addRecord}
+  const deleteRecord = (id: number) => {
+    setRecords(records.filter(record => record.id !== id))
+  }
+  return {records, addRecord, deleteRecord}
 }

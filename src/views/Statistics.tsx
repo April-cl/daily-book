@@ -22,6 +22,11 @@ const RecordItem = styled.div`
     margin-left: 16px;
     color: #999;
   }
+  > .delete {
+    font-size: 16px;
+    fill: #fc2b29;
+    margin-left: 5px;
+  }
 `
 
 const Header = styled.div`
@@ -35,7 +40,7 @@ const Header = styled.div`
 
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-')
-  const {records} = useRecords()
+  const {records, deleteRecord} = useRecords()
   const beautify = (string: string) => {
     const day = dayjs(string);
     const now = dayjs();
@@ -61,7 +66,6 @@ function Statistics() {
   const hashArray = Object.entries(hash).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
-  console.log(hashArray);
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
@@ -77,11 +81,16 @@ function Statistics() {
             <div>
               {records.map(record => {
                 return (
-                  <RecordItem key={records.indexOf(record)}>
+                  <RecordItem key={record.id}>
                     <Icon name={record.tag.iconName} />
                     <span className="tagName">{record.tag.chinese}</span>
                     <span className='note'>{record.note}</span>
                     <span className='amount'>￥{record.amount}</span>
+                    <button className='delete' onClick={() => {
+                      deleteRecord(record.id)
+                    }}>
+                      <Icon name='delete' />
+                    </button>
                   </RecordItem>
                 )
               })}

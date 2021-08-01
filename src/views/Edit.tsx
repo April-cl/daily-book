@@ -17,6 +17,7 @@ const EditLayout = styled(Layout)`
 `
 
 const defaultRecord: RecordItem = {
+  id: parseInt(window.localStorage.getItem('recordIdMax') || '0') + 1,
   category: '-' as Category,
   tag: {id:0, chinese:'', iconName:''},
   note: '',

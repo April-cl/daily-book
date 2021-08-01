@@ -43,7 +43,7 @@ type Props = {
 
 const TagEdit: React.FC<Props> = (props) => {
   const newTag = {
-    id: parseInt(window.localStorage.getItem('idMax') || '0') + 1,
+    id: parseInt(window.localStorage.getItem('tagIdMax') || '0') + 1,
     iconName: 'custom',
     chinese: ''
   }

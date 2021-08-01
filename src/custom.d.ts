@@ -4,6 +4,7 @@ type Tag = {
   chinese: string
 }
 type RecordItem = {
+  id: number
   tag: Tag
   note: string
   category: '+' | '-'

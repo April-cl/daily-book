@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createId } from 'lib/createId';
+import { createTagId } from 'lib/createId';
 import { useUpdate } from './useUpdate';
 
 const useTags = () => {
@@ -8,10 +8,10 @@ const useTags = () => {
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]')
     if (localTags.length === 0) {
       localTags = [
-        {id: createId(), iconName: 'diet',chinese: '餐饮'},
-        {id: createId(), iconName: 'clothes',chinese: '服饰'},
-        {id: createId(), iconName: 'family',chinese: '家用'},
-        {id: createId(), iconName: 'study',chinese: '学习'}
+        {id: createTagId(), iconName: 'diet',chinese: '餐饮'},
+        {id: createTagId(), iconName: 'clothes',chinese: '服饰'},
+        {id: createTagId(), iconName: 'family',chinese: '家用'},
+        {id: createTagId(), iconName: 'study',chinese: '学习'}
       ]
     }
     setTags(localTags)
@@ -46,7 +46,7 @@ const useTags = () => {
     setTags(tags.filter(tag => tag.id !== id))
   }
   const addTag = (chinese: string) => {
-    setTags([...tags, {id: createId(), iconName: 'custom', chinese: chinese}]);
+    setTags([...tags, {id: createTagId(), iconName: 'custom', chinese: chinese}]);
   };
   return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag}
 }
