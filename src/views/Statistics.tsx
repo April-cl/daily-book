@@ -73,8 +73,7 @@ function Statistics() {
         return (
           <div key={date}>
             <Header>
-              {/*{beautify(date)}*/}
-              {date}
+              {beautify(date)}
               <span className='total'>￥{records.reduce((sum, item) => {
                 return sum + item.amount;
               }, 0)}</span>

@@ -16,13 +16,15 @@ const EditLayout = styled(Layout)`
     flex-direction: column;
 `
 
+const today = new Date().toISOString().slice(0, 10)
+
 const defaultRecord: RecordItem = {
   id: parseInt(window.localStorage.getItem('recordIdMax') || '0') + 1,
   category: '-' as Category,
   tag: {id:0, chinese:'', iconName:''},
   note: '',
   amount: 0,
-  createAt: ''
+  createAt: today
 }
 
 function Edit() {
