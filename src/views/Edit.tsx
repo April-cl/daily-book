@@ -31,6 +31,7 @@ let defaultRecord: RecordItem = {
 function Edit() {
   const {addRecord, findRecord, updateRecord, testRecord} = useRecords()
   let {recordId} = useParams<Params>()
+  const history = useHistory()
   const { show, hide, RenderModal } = useModal()
   const [content, setContent] = useState('')
   const [record, setRecord] = useState(defaultRecord)
@@ -60,6 +61,12 @@ function Edit() {
       setContent('标签还没选呢！')
     }
   }
+  const close = () => {
+    hide();
+    if (recordId) {
+      history.goBack()
+    }
+  }
   useEffect(() => {
     if (editRecord) {
       setRecord(editRecord)
@@ -80,7 +87,7 @@ function Edit() {
         }} onOk={submit} />
       </EditLayout>
       <RenderModal modalTitle='提交结果'>
-        <Tooltip closeModal={hide} content={content}/>
+        <Tooltip closeModal={close} content={content}/>
       </RenderModal>
     </>
   );
