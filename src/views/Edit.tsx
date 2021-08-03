@@ -1,5 +1,6 @@
 import Layout from '../components/Layout';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CategorySection } from './Edit/CategorySection';
 import { OutputSection } from './Edit/OutputSection';
@@ -18,7 +19,7 @@ const EditLayout = styled(Layout)`
 
 const today = new Date().toISOString().slice(0, 10)
 
-const defaultRecord: RecordItem = {
+let defaultRecord: RecordItem = {
   id: parseInt(window.localStorage.getItem('recordIdMax') || '0') + 1,
   category: '-' as Category,
   tag: {id:0, chinese:'', iconName:''},
@@ -28,11 +29,13 @@ const defaultRecord: RecordItem = {
 }
 
 function Edit() {
+  const {addRecord, findRecord, updateRecord, testRecord} = useRecords()
+  let {recordId} = useParams<Params>()
   const { show, hide, RenderModal } = useModal()
   const [content, setContent] = useState('')
   const [record, setRecord] = useState(defaultRecord)
-  const {addRecord} = useRecords()
-  const [output, setOutput] = useState('0')
+  const [output, setOutput] = useState(record.amount.toString())
+  const editRecord = findRecord(parseInt(recordId))
   const onChange = (obj: Partial<typeof record>) => {
     setRecord({
       ...record,
@@ -41,17 +44,28 @@ function Edit() {
   }
   const submit = () => {
     show()
-    const resultNumber = addRecord(record)
+    const resultNumber = testRecord(record)
     if (resultNumber === 0) {
+      setContent('记下啦~~~')
       setRecord(defaultRecord)
       setOutput('0')
-      setContent('记下啦~~~')
+      if (recordId) {
+        updateRecord(record)
+      } else {
+        addRecord(record)
+      }
     } else if (resultNumber === 1) {
       setContent('金额还没写呢！')
     } else if (resultNumber === 2) {
       setContent('标签还没选呢！')
     }
   }
+  useEffect(() => {
+    if (editRecord) {
+      setRecord(editRecord)
+      setOutput(editRecord.amount.toString())
+    }
+  }, [editRecord])
   return (
     <>
       <EditLayout>

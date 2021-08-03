@@ -10,18 +10,34 @@ export const useRecords = () => {
   useUpdate(() => {
     window.localStorage.setItem('records', JSON.stringify(records))
   }, [records])
-  const addRecord = (record: RecordItem) => {
+  const findRecord = (id: number) => {
+    return records.filter((record) => {
+      return record.id === id
+    })[0]
+  }
+  const testRecord = (record: RecordItem) => {
     if (record.amount <= 0) {
       return 1
     }
     if (record.tag.id === 0) {
       return 2
     }
-    setRecords([...records, {...record, id: createRecordId()}])
     return 0
+  }
+  const addRecord = (record: RecordItem) => {
+    setRecords([...records, {...record, id: createRecordId()}])
   }
   const deleteRecord = (id: number) => {
     setRecords(records.filter(record => record.id !== id))
   }
-  return {records, addRecord, deleteRecord}
+  const updateRecord = (newRecord: RecordItem) => {
+    // @ts-ignore
+    setRecords(records.map((record) => {
+      if (record.id === newRecord.id) {
+        record = newRecord
+      }
+      return record
+    }))
+  }
+  return {records, addRecord, deleteRecord, findRecord, updateRecord, testRecord}
 }

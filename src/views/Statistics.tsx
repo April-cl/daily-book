@@ -5,6 +5,7 @@ import { useRecords } from '../hooks/useRecords';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import Icon from '../components/Icon';
+import { Link } from 'react-router-dom';
 
 const RecordItem = styled.div`
   display:flex;
@@ -22,10 +23,12 @@ const RecordItem = styled.div`
     margin-left: 16px;
     color: #999;
   }
-  > .delete {
+  > .delete, > .edit {
     font-size: 16px;
+    margin-left: 10px;
+  }
+  > .delete {
     fill: #fc2b29;
-    margin-left: 5px;
   }
 `
 
@@ -86,6 +89,9 @@ function Statistics() {
                     <span className="tagName">{record.tag.chinese}</span>
                     <span className='note'>{record.note}</span>
                     <span className='amount'>￥{record.amount}</span>
+                    <Link to={'/edit/' + record.id} className='edit'>
+                      <Icon name='modify' />
+                    </Link>
                     <button className='delete' onClick={() => {
                       deleteRecord(record.id)
                     }}>

@@ -12,3 +12,7 @@ type RecordItem = {
   createAt: string
 }
 type Category = '-' | '+'
+
+type Params = {
+  recordId: string
+}
