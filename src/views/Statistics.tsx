@@ -85,6 +85,7 @@ function Statistics() {
   const hashArray = Object.entries(hash).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
+  const [amountTotal, setAmountTotal] = useState(0)
   console.log(selectedRecords);
   console.log(hash);
   console.log(hashArray);
@@ -95,9 +96,9 @@ function Statistics() {
         <DateSelectSection value={currentDate} onChange={(date) => {
           setCurrentDate(date)
         }} disabled={disabled} toggle={() => setDisabled(!disabled)} />
-        <div className='amount'>总{category === '-' ? '支出':'收入'}：￥{selectedRecords.reduce((sum, item) => {
-          return sum + item.amount;
-        }, 0)}</div>
+        <div className='amount'>总{category === '-' ? '支出':'收入'}：￥{
+          hashArray.reduce((sum,item) => { return sum + item[1].reduce((s, i) => {return s + i.amount}, 0)}, 0)
+        }</div>
       </AmountTotal>
       {hashArray.map(([date, records]) => {
         return (
