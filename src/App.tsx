@@ -27,7 +27,7 @@ function App() {
           <Route exact path="/statistics">
             <Statistics />
           </Route>
-          <Redirect exact from='/' to='/edit'></Redirect>
+          <Redirect exact from='/' to='/statistics'></Redirect>
           <Route path='*'>
             <NoMatch />
           </Route>

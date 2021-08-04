@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import styled from 'styled-components';
 import Icon from '../components/Icon';
 import { Link } from 'react-router-dom';
+import { DateSelectSection } from './Statistics/DateSelectSection';
 
 const RecordItem = styled.div`
   display:flex;
@@ -31,7 +32,16 @@ const RecordItem = styled.div`
     fill: #fc2b29;
   }
 `
-
+const AmountTotal = styled.div`
+  padding: 0 20px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: #fff;
+`
 const Header = styled.div`
   font-size: 18px;
   line-height: 20px;
@@ -42,6 +52,8 @@ const Header = styled.div`
 `
 
 function Statistics() {
+  const [currentDate, setCurrentDate] = useState(dayjs().format('YYYY-MM'))
+  const [disabled, setDisabled] = useState(true)
   const [category, setCategory] = useState<'-' | '+'>('-')
   const {records, deleteRecord} = useRecords()
   const beautify = (string: string) => {
@@ -72,6 +84,14 @@ function Statistics() {
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
+      <AmountTotal>
+        <DateSelectSection value={currentDate} onChange={(date) => {
+          setCurrentDate(date)
+        }} disabled={disabled} toggle={() => setDisabled(!disabled)} />
+        <div className='amount'>总{category === '-' ? '支出':'收入'}：￥{selectedRecords.reduce((sum, item) => {
+          return sum + item.amount;
+        }, 0)}</div>
+      </AmountTotal>
       {hashArray.map(([date, records]) => {
         return (
           <div key={date}>
