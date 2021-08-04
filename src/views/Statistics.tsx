@@ -76,11 +76,18 @@ function Statistics() {
     if (!(key in hash)) {
       hash[key] = []
     }
-    return hash[key].push(record)
+    if (disabled) {
+      return hash[key].push(record)
+    } else if (key.slice(0, 7) === currentDate) {
+      return hash[key].push(record)
+    }
   })
   const hashArray = Object.entries(hash).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
+  console.log(selectedRecords);
+  console.log(hash);
+  console.log(hashArray);
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
@@ -95,16 +102,16 @@ function Statistics() {
       {hashArray.map(([date, records]) => {
         return (
           <div key={date}>
-            <Header>
-              {beautify(date)}
-              <span className='total'>￥{records.reduce((sum, item) => {
-                return sum + item.amount;
-              }, 0)}</span>
-            </Header>
-            <div>
               {records.map(record => {
                 return (
-                  <RecordItem key={record.id}>
+                  <div key={record.id}>
+                  <Header>
+                    {beautify(date)}
+                    <span className='total'>￥{records.reduce((sum, item) => {
+                      return sum + item.amount;
+                    }, 0)}</span>
+                  </Header>
+                  <RecordItem>
                     <Icon name={record.tag.iconName} />
                     <span className="tagName">{record.tag.chinese}</span>
                     <span className='note'>{record.note}</span>
@@ -118,9 +125,9 @@ function Statistics() {
                       <Icon name='delete' />
                     </button>
                   </RecordItem>
+                  </div>
                 )
               })}
-            </div>
           </div>)
       })}
     </Layout>

@@ -93,7 +93,7 @@ const DateSelectSection:React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <div className="all">
-        <label><input type="checkbox" checked={props.disabled} onClick={() => props.toggle()}/><span>全部</span></label>
+        <label><input type="checkbox" checked={props.disabled} onChange={() => props.toggle()}/><span>全部</span></label>
       </div>
       <div className="monthSelector">
         <input disabled={props.disabled} value={props.value} type="month" onChange={(e) => {
