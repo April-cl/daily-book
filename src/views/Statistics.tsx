@@ -85,10 +85,6 @@ function Statistics() {
   const hashArray = Object.entries(hash).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
-  const [amountTotal, setAmountTotal] = useState(0)
-  console.log(selectedRecords);
-  console.log(hash);
-  console.log(hashArray);
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
