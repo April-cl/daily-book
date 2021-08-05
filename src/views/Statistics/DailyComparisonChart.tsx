@@ -7,7 +7,14 @@ const ChartWrapper = styled.div`
   height: 200px;
 `
 
-const DailyComparisonChart: React.FC = () => {
+type Props = {
+  data: {
+    date: string[],
+    amount: number[]
+  }
+}
+
+const DailyComparisonChart: React.FC<Props> = (props) => {
   const divRef = useRef(null);
   useEffect(() => {
     // @ts-ignore
@@ -22,7 +29,7 @@ const DailyComparisonChart: React.FC = () => {
       tooltip: {},
       xAxis: {
         type: 'category',
-        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
+        data: props.data.date,
         axisTick: {
           alignWithLabel: true
         }
@@ -31,13 +38,13 @@ const DailyComparisonChart: React.FC = () => {
       series: [{
         name: '金额',
         type: 'line',
-        data: [5, 20, 36, 10, 10, 20],
+        data: props.data.amount,
         itemStyle: {
           color: '#26b59a'
         }
       }]
     })
-  }, [])
+  }, [props])
   return (
     <ChartWrapper ref={divRef}></ChartWrapper>
   )

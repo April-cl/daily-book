@@ -97,7 +97,7 @@ function Statistics() {
           hashArray.reduce((sum,item) => { return sum + item[1].reduce((s, i) => {return s + i.amount}, 0)}, 0)
         }</div>
       </AmountTotal>
-      <DailyComparisonChart />
+      <DailyComparisonChart data={{date: hashArray.filter((item) => {if (item[1].length>0) {return item[0]}}).map((item) => {return item[0]}), amount: hashArray.map((item) => {return item[1].map((i) => {return i.amount;});}).flat()}} />
       {hashArray.map(([date, records]) => {
         return (
           <div key={date}>
