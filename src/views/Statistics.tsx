@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Icon from '../components/Icon';
 import { Link } from 'react-router-dom';
 import { DateSelectSection } from './Statistics/DateSelectSection';
+import { DailyComparisonChart } from './Statistics/DailyComparisonChart';
 
 const RecordItem = styled.div`
   display:flex;
@@ -96,6 +97,7 @@ function Statistics() {
           hashArray.reduce((sum,item) => { return sum + item[1].reduce((s, i) => {return s + i.amount}, 0)}, 0)
         }</div>
       </AmountTotal>
+      <DailyComparisonChart />
       {hashArray.map(([date, records]) => {
         return (
           <div key={date}>
