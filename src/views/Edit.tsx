@@ -11,13 +11,14 @@ import { TagsSection } from './Edit/TagsSection';
 import { useRecords } from '../hooks/useRecords';
 import { useModal } from '../hooks/useModal';
 import { Tooltip } from '../components/Tooltip';
+import dayjs from 'dayjs';
 
 const EditLayout = styled(Layout)`
     display:flex;
     flex-direction: column;
 `
 
-const today = new Date().toLocaleDateString()
+const today = dayjs().format('YYYY-MM-DD')
 
 let defaultRecord: RecordItem = {
   id: parseInt(window.localStorage.getItem('recordIdMax') || '0') + 1,

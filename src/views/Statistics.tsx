@@ -84,6 +84,7 @@ function Statistics() {
   const hashArray = Object.entries(hash).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
+  console.log(hashArray);
   const getAmountTotal = () => selectedRecords.reduce((sum, item) => { return sum + item.amount }, 0)
   const getDailyData = () => {
     return {
@@ -105,15 +106,15 @@ function Statistics() {
       {hashArray.map(([date, records]) => {
         return (
           <div key={date}>
+            <Header>
+              {beautify(date)}
+              <span className='total'>￥{records.reduce((sum, item) => {
+                return sum + item.amount;
+              }, 0)}</span>
+            </Header>
             {records.map(record => {
               return (
                 <div key={record.id}>
-                  <Header>
-                    {beautify(date)}
-                    <span className='total'>￥{records.reduce((sum, item) => {
-                      return sum + item.amount;
-                    }, 0)}</span>
-                  </Header>
                   <RecordItem>
                     <Icon name={record.tag.iconName} />
                     <span className="tagName">{record.tag.chinese}</span>
