@@ -27,7 +27,6 @@ const Wrapper = styled.section`
 
   > .date {
     background-color: #f0eff4;
-    position: absolute;
     top: 0;
     left: 0;
     height: 100%;

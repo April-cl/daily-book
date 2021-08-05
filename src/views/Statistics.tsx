@@ -48,6 +48,7 @@ const Header = styled.div`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
+  position: relative;
   > .total {
     position: absolute;right: 16px;
   }
