@@ -8,6 +8,7 @@ import Icon from '../components/Icon';
 import { Link } from 'react-router-dom';
 import { DateSelectSection } from './Statistics/DateSelectSection';
 import { DailyComparisonChart } from './Statistics/DailyComparisonChart';
+import { TagsComparisonChart } from './Statistics/TagsComparisonChart';
 
 const RecordItem = styled.div`
   display:flex;
@@ -98,6 +99,7 @@ function Statistics() {
         }</div>
       </AmountTotal>
       <DailyComparisonChart data={{date: hashArray.filter((item) => {if (item[1].length>0) {return item[0]}}).map((item) => {return item[0]}), amount: hashArray.map((item) => {return item[1].map((i) => {return i.amount;});}).flat()}} />
+      <TagsComparisonChart />
       {hashArray.map(([date, records]) => {
         return (
           <div key={date}>
