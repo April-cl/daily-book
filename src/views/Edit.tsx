@@ -17,7 +17,7 @@ const EditLayout = styled(Layout)`
     flex-direction: column;
 `
 
-const today = new Date().toISOString().slice(0, 10)
+const today = new Date().toLocaleDateString()
 
 let defaultRecord: RecordItem = {
   id: parseInt(window.localStorage.getItem('recordIdMax') || '0') + 1,
