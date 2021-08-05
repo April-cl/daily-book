@@ -57,7 +57,7 @@ function Statistics() {
   const [currentDate, setCurrentDate] = useState(dayjs().format('YYYY-MM'))
   const [disabled, setDisabled] = useState(true)
   const [category, setCategory] = useState<'-' | '+'>('-')
-  const {records, deleteRecord} = useRecords()
+  const { records, deleteRecord } = useRecords()
   const beautify = (string: string) => {
     const day = dayjs(string);
     const now = dayjs();
@@ -71,22 +71,25 @@ function Statistics() {
       return day.format("YYYY年M月D日");
     }
   }
-  const hash: {[Key: string]: RecordItem[]} = {}
-  const selectedRecords = records.filter(record => record.category === category)
+  const hash: { [Key: string]: RecordItem[] } = {}
+  const selectedRecords = disabled ? records.filter(record => record.category === category) : records.filter(record => (record.category === category) && (record.createAt.slice(0, 7) === currentDate))
   selectedRecords.map(record => {
     const key = record.createAt
     if (!(key in hash)) {
       hash[key] = []
     }
-    if (disabled) {
-      return hash[key].push(record)
-    } else if (key.slice(0, 7) === currentDate) {
-      return hash[key].push(record)
-    }
+    return hash[key].push(record)
   })
   const hashArray = Object.entries(hash).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
+  const getAmountTotal = () => selectedRecords.reduce((sum, item) => { return sum + item.amount }, 0)
+  const getDailyData = () => {
+    return {
+      date: hashArray.filter(item => item[0]).map(item => item[0]),
+      amount: hashArray.map(item => item[1].map(i => i.amount)).flat()
+    };
+  }
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
@@ -94,18 +97,16 @@ function Statistics() {
         <DateSelectSection value={currentDate} onChange={(date) => {
           setCurrentDate(date)
         }} disabled={disabled} toggle={() => setDisabled(!disabled)} />
-        <div className='amount'>总{category === '-' ? '支出':'收入'}：￥{
-          hashArray.reduce((sum,item) => { return sum + item[1].reduce((s, i) => {return s + i.amount}, 0)}, 0)
-        }</div>
+        <div>总{category === '-' ? '支出' : '收入'}：￥{getAmountTotal()}</div>
       </AmountTotal>
-      <DailyComparisonChart data={{date: hashArray.filter((item) => {if (item[1].length>0) {return item[0]}}).map((item) => {return item[0]}), amount: hashArray.map((item) => {return item[1].map((i) => {return i.amount;});}).flat()}} />
+      <DailyComparisonChart data={getDailyData()} />
       <TagsComparisonChart />
       {hashArray.map(([date, records]) => {
         return (
           <div key={date}>
-              {records.map(record => {
-                return (
-                  <div key={record.id}>
+            {records.map(record => {
+              return (
+                <div key={record.id}>
                   <Header>
                     {beautify(date)}
                     <span className='total'>￥{records.reduce((sum, item) => {
@@ -126,9 +127,9 @@ function Statistics() {
                       <Icon name='delete' />
                     </button>
                   </RecordItem>
-                  </div>
-                )
-              })}
+                </div>
+              )
+            })}
           </div>)
       })}
     </Layout>
