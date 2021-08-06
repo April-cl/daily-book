@@ -47,7 +47,7 @@ const TagEdit: React.FC<Props> = (props) => {
     iconName: 'custom',
     chinese: ''
   }
-  const {addTag, updateTag, findTag} = useTags()
+  const {addTag, updateTag, findTag, testTag} = useTags()
   let tag: Tag
   let option: string
   if (props.value && findTag(props.value.id)) {
@@ -76,15 +76,21 @@ const TagEdit: React.FC<Props> = (props) => {
       <div className="buttonGroup">
         <button className='close' onClick={() => {props.closeModal();}}>取消</button>
         <button className='submit' onClick={() => {
-          if (option === 'edit') {
-            updateTag(tag.id, inputValue)
-          } else if (option === 'add') {
-            addTag(inputValue)
+          if (testTag(inputValue) === 0) {
+            if (option === 'edit') {
+              updateTag(tag.id, inputValue)
+            } else if (option === 'add') {
+              addTag(inputValue)
+            }
+            setTimeout(() => {
+              props.closeModal()
+              window.location.reload()
+            }, 0)
+          } else if (testTag(inputValue) === 1) {
+            alert('标签名不能为空')
+          } else if (testTag(inputValue) === 2) {
+            alert('标签名已存在')
           }
-          setTimeout(() => {
-            props.closeModal()
-            window.location.reload()
-          }, 0)
         }}>确定修改</button>
       </div>
     </TagEditWrapper>

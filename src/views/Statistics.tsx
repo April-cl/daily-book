@@ -98,8 +98,6 @@ function Statistics() {
       amount: hashByDateArray.map(item => item[1].reduce((sum, i) => {return sum + i.amount},0))
     };
   }
-  console.log(hashByTag);
-  console.log(hashByTagArray);
   const getTagData = () => {
     const obj = {
       name: hashByTagArray.filter(item => item[0]).map(item => item[0]),
@@ -114,7 +112,6 @@ function Statistics() {
     }
     return array;
   }
-  console.log(getTagData());
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />

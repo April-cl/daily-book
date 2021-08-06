@@ -34,6 +34,15 @@ const useTags = () => {
     }
     return result
   }
+  const testTag = (chinese: string) => {
+    console.log(tags.filter((tag) => {return tag.chinese === chinese;}));
+    if (chinese === '') {
+      return 1
+    } else if (tags.filter((tag) => {return tag.chinese === chinese}).length > 0) {
+      return 2
+    }
+    return 0
+  }
   const updateTag = (id: number, chinese: string) => {
     setTags(tags.map((tag) => {
       if (tag.id === id) {
@@ -48,7 +57,7 @@ const useTags = () => {
   const addTag = (chinese: string) => {
     setTags([...tags, {id: createTagId(), iconName: 'custom', chinese: chinese}]);
   };
-  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag}
+  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag, testTag}
 }
 
 export {useTags}
