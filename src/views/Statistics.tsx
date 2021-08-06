@@ -72,25 +72,49 @@ function Statistics() {
       return day.format("YYYY年M月D日");
     }
   }
-  const hash: { [Key: string]: RecordItem[] } = {}
+  const hashByDate: { [Date: string]: RecordItem[] } = {}
+  const hashByTag: { [Tag: string]: RecordItem[] } = {}
   const selectedRecords = disabled ? records.filter(record => record.category === category) : records.filter(record => (record.category === category) && (record.createAt.slice(0, 7) === currentDate))
   selectedRecords.map(record => {
-    const key = record.createAt
-    if (!(key in hash)) {
-      hash[key] = []
+    const date = record.createAt
+    const tag = record.tag.chinese
+    if (!(date in hashByDate)) {
+      hashByDate[date] = []
     }
-    return hash[key].push(record)
+    if (!(tag in hashByTag)) {
+      hashByTag[tag] = []
+    }
+    hashByDate[date].push(record)
+    hashByTag[tag].push(record)
   })
-  const hashArray = Object.entries(hash).sort((a, b) => {
+  const hashByDateArray = Object.entries(hashByDate).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
+  const hashByTagArray = Object.entries(hashByTag)
   const getAmountTotal = () => selectedRecords.reduce((sum, item) => { return sum + item.amount }, 0)
   const getDailyData = () => {
     return {
-      date: hashArray.filter(item => item[0]).map(item => item[0]),
-      amount: hashArray.map(item => item[1].reduce((sum, i) => {return sum + i.amount},0))
+      date: hashByDateArray.filter(item => item[0]).map(item => item[0]),
+      amount: hashByDateArray.map(item => item[1].reduce((sum, i) => {return sum + i.amount},0))
     };
   }
+  console.log(hashByTag);
+  console.log(hashByTagArray);
+  const getTagData = () => {
+    const obj = {
+      name: hashByTagArray.filter(item => item[0]).map(item => item[0]),
+      value: hashByTagArray.map(item => item[1].reduce((sum, i) => {return sum + i.amount},0))
+    }
+    let array = []
+    for (let i = 0; i < obj.name.length; i++) {
+      array.push({
+        name: obj.name[i],
+        value: obj.value[i]
+      })
+    }
+    return array;
+  }
+  console.log(getTagData());
   return (
     <Layout>
       <CategorySection value={category} onChange={value => setCategory(value)} />
@@ -101,8 +125,8 @@ function Statistics() {
         <div>总{category === '-' ? '支出' : '收入'}：￥{getAmountTotal()}</div>
       </AmountTotal>
       <DailyComparisonChart data={getDailyData()} />
-      <TagsComparisonChart />
-      {hashArray.map(([date, records]) => {
+      <TagsComparisonChart data={getTagData()} />
+      {hashByDateArray.map(([date, records]) => {
         return (
           <div key={date}>
             <Header>
