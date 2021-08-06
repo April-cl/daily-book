@@ -88,7 +88,7 @@ function Statistics() {
   const getDailyData = () => {
     return {
       date: hashArray.filter(item => item[0]).map(item => item[0]),
-      amount: hashArray.map(item => item[1].map(i => i.amount)).flat()
+      amount: hashArray.map(item => item[1].reduce((sum, i) => {return sum + i.amount},0))
     };
   }
   return (
