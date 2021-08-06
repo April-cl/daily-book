@@ -84,7 +84,6 @@ function Statistics() {
   const hashArray = Object.entries(hash).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
   })
-  console.log(hashArray);
   const getAmountTotal = () => selectedRecords.reduce((sum, item) => { return sum + item.amount }, 0)
   const getDailyData = () => {
     return {

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { Ref, useImperativeHandle, useState } from 'react';
 import { Wrapper } from './NumberPadSection/Wrapper';
 import { generateOutput } from './NumberPadSection/generateOutput';
 
 type Props = {
   value: number,
   onChange: (value: number, output: string) => void,
-  onOk: () => void
+  onOk: () => void,
+  onRef: Ref<any>
 }
 
 const NumberPadSection: React.FC<Props> = (props) => {
@@ -35,6 +36,14 @@ const NumberPadSection: React.FC<Props> = (props) => {
       setOutput(generateOutput(text, output))
     }
   }
+  const func = () => {
+    setOutput('')
+  }
+  useImperativeHandle(props.onRef, () => {
+    return {
+      func: func,
+    };
+  })
   return (
     <Wrapper>
       <div className="pad" onClick={onClickButtonWrapper}>

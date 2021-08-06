@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CategorySection } from './Edit/CategorySection';
@@ -33,6 +33,7 @@ function Edit() {
   const {addRecord, findRecord, updateRecord, testRecord} = useRecords()
   let {recordId} = useParams<Params>()
   const history = useHistory()
+  const outputRef = useRef(null)
   const { show, hide, RenderModal } = useModal()
   const [content, setContent] = useState('')
   const [record, setRecord] = useState(defaultRecord)
@@ -48,14 +49,16 @@ function Edit() {
     show()
     const resultNumber = testRecord(record)
     if (resultNumber === 0) {
-      setContent('记下啦~~~')
-      setRecord(defaultRecord)
-      setOutput('0')
       if (recordId) {
         updateRecord(record)
       } else {
         addRecord(record)
       }
+      setContent('记下啦~~~')
+      setRecord(defaultRecord)
+      setOutput('0')
+      // @ts-ignore
+      outputRef.current?.func()
     } else if (resultNumber === 1) {
       setContent('金额还没写呢！')
     } else if (resultNumber === 2) {
@@ -82,7 +85,7 @@ function Edit() {
         <TagsSection value={record.tag} onChange={(tag) => {onChange({tag})}} />
         <DateSection value = {record.createAt} onChange={(createAt) => {onChange({createAt});}} />
         <NotesSection value={record.note} onChange={(note: string) => {onChange({note})}} />
-        <NumberPadSection value={record.amount} onChange={(amount, output) => {
+        <NumberPadSection onRef={outputRef} value={record.amount} onChange={(amount, output) => {
           onChange({amount})
           setOutput(output)
         }} onOk={submit} />
