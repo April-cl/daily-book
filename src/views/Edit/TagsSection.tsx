@@ -18,6 +18,7 @@ const Wrapper = styled.section`
       align-items: center;
       width: 20%;
       font-size: 14px;
+      text-align: center;
       
       .iconWrapper {
         width: 40px;

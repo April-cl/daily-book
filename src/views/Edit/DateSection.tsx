@@ -8,23 +8,20 @@ const Wrapper = styled.section`
   cursor: pointer;
   border-bottom: 1px solid #7a7a7a;
   margin: 10px 20px;
-  height: 40px;
+  min-height: 40px;
   line-height: 40px;
   font-size: 16px;
-
   > input {
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-
     ::-webkit-calendar-picker-indicator {
       height: 100%;
       width: 100%;
     }
   }
-
   > .date {
     background-color: #f0eff4;
     top: 0;
@@ -32,7 +29,7 @@ const Wrapper = styled.section`
     height: 100%;
     width: 100%;
     pointer-events: none;
-    position: relative;
+    position: absolute;
 
     > .icon {
       position: absolute;
