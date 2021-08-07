@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useTags } from 'hooks/useTags';
 import Icon from 'components/Icon';
 import styled from 'styled-components';
+import { Tooltip } from '../../components/Tooltip';
+import { useModal } from '../../hooks/useModal';
 
 const TagEditWrapper = styled.div`
   .editIcon, .editName {
@@ -47,6 +49,8 @@ const TagEdit: React.FC<Props> = (props) => {
     iconName: 'custom',
     chinese: ''
   }
+  const { show, hide, RenderModal } = useModal()
+  const [content, setContent] = useState('')
   const {addTag, updateTag, findTag, testTag} = useTags()
   let tag: Tag
   let option: string
@@ -76,7 +80,9 @@ const TagEdit: React.FC<Props> = (props) => {
       <div className="buttonGroup">
         <button className='close' onClick={() => {props.closeModal();}}>取消</button>
         <button className='submit' onClick={() => {
+          show()
           if (testTag(inputValue) === 0) {
+            setContent('记下啦~~~')
             if (option === 'edit') {
               updateTag(tag.id, inputValue)
             } else if (option === 'add') {
@@ -87,12 +93,16 @@ const TagEdit: React.FC<Props> = (props) => {
               window.location.reload()
             }, 0)
           } else if (testTag(inputValue) === 1) {
-            alert('标签名不能为空')
+            setContent('标签名不能为空')
           } else if (testTag(inputValue) === 2) {
-            alert('标签名已存在')
+            setContent('标签名已存在')
           }
         }}>确定修改</button>
       </div>
+
+      <RenderModal modalTitle='提交结果'>
+        <Tooltip closeModal={hide} content={content}/>
+      </RenderModal>
     </TagEditWrapper>
   )
 }
