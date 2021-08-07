@@ -9,7 +9,7 @@ export const useRecords = () => {
   }, [])
   useUpdate(() => {
     window.localStorage.setItem('records', JSON.stringify(records))
-  }, [records])
+  }, records)
   const findRecord = (id: number) => {
     return records.filter((record) => {
       return record.id === id
