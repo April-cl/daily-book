@@ -9,5 +9,6 @@ export const useUpdate = (fn: () => void, dependency: any[]) => {
     if (count.current > 1) {
       fn()
     }
-  }, [fn, dependency])
+    // eslint-disable-next-line
+  }, dependency)
 }

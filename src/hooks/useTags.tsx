@@ -18,7 +18,7 @@ const useTags = () => {
   }, [])
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags))
-  }, tags)
+  }, [tags])
   const findTag = (id: number) => {
     return tags.filter((tag) => {
       return tag.id === id
@@ -35,7 +35,6 @@ const useTags = () => {
     return result
   }
   const testTag = (chinese: string) => {
-    console.log(tags.filter((tag) => {return tag.chinese === chinese;}));
     if (chinese === '') {
       return 1
     } else if (tags.filter((tag) => {return tag.chinese === chinese}).length > 0) {
