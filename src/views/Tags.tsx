@@ -7,18 +7,21 @@ import { TagEdit } from './Tags/TagEdit';
 import { useModal } from 'hooks/useModal';
 
 const TagWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   @media (min-width: 500px) {
     margin: 0 auto;
     max-width: 500px;
     border: 1px solid #ccc;
-    transform: scale3d(1, 1, 1);
+    overflow-x: hidden;
   }
 `
 
 const TagList = styled.ul`
+  flex: 1;
+  overflow: auto;
   width: 100%;
-  overflow-x: hidden;
   background-color: #fff;
   font-size: 16px;
   li {
@@ -47,8 +50,6 @@ const TagList = styled.ul`
   }
 `
 const AddTag = styled.button`
-  position: fixed;
-  bottom: 0;
   display: flex;
   width: 100%;
   align-items: center;
@@ -96,18 +97,18 @@ function Tags() {
             </button>
           </li>
         )}
-        <AddTag onClick={() => {
-          setSelectedTag(null)
-          setModalTitle('新建标签')
-          show();
-        }}>
-          <Icon name='add' />
-          <span>新建标签</span>
-        </AddTag>
-        <RenderModal modalTitle={modalTitle}>
-          <TagEdit value={selectedTag} closeModal={hide}/>
-        </RenderModal>
       </TagList>
+      <AddTag onClick={() => {
+        setSelectedTag(null)
+        setModalTitle('新建标签')
+        show();
+      }}>
+        <Icon name='add' />
+        <span>新建标签</span>
+      </AddTag>
+      <RenderModal modalTitle={modalTitle}>
+        <TagEdit value={selectedTag} closeModal={hide}/>
+      </RenderModal>
     </TagWrapper>
   );
 }

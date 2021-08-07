@@ -62,6 +62,11 @@ const TagEdit: React.FC<Props> = (props) => {
     option = 'add'
   }
   const [inputValue, setInputValue] = useState(tag.chinese)
+  const close = () => {
+    hide()
+    props.closeModal()
+    window.location.reload()
+  }
   useEffect(() => {
     setInputValue(tag.chinese)
   }, [tag.chinese])
@@ -82,16 +87,12 @@ const TagEdit: React.FC<Props> = (props) => {
         <button className='submit' onClick={() => {
           show()
           if (testTag(inputValue) === 0) {
-            setContent('记下啦~~~')
             if (option === 'edit') {
               updateTag(tag.id, inputValue)
             } else if (option === 'add') {
               addTag(inputValue)
             }
-            setTimeout(() => {
-              props.closeModal()
-              window.location.reload()
-            }, 0)
+            setContent('记下啦~~~')
           } else if (testTag(inputValue) === 1) {
             setContent('标签名不能为空')
           } else if (testTag(inputValue) === 2) {
@@ -101,7 +102,7 @@ const TagEdit: React.FC<Props> = (props) => {
       </div>
 
       <RenderModal modalTitle='提交结果'>
-        <Tooltip closeModal={hide} content={content}/>
+        <Tooltip closeModal={close} content={content}/>
       </RenderModal>
     </TagEditWrapper>
   )
