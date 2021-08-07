@@ -104,6 +104,7 @@ function Statistics() {
     }
     hashByDate[date].push(record)
     hashByTag[tag].push(record)
+    return record
   })
   const hashByDateArray = Object.entries(hashByDate).sort((a, b) => {
     return dayjs(b[0]).valueOf() - dayjs(a[0]).valueOf()
