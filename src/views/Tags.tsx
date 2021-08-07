@@ -6,7 +6,19 @@ import { TopBar } from 'components/TopBar';
 import { TagEdit } from './Tags/TagEdit';
 import { useModal } from 'hooks/useModal';
 
+const TagWrapper = styled.div`
+  height: 100vh;
+  @media (min-width: 500px) {
+    margin: 0 auto;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    transform: scale3d(1, 1, 1);
+  }
+`
+
 const TagList = styled.ul`
+  width: 100%;
+  overflow-x: hidden;
   background-color: #fff;
   font-size: 16px;
   li {
@@ -37,10 +49,10 @@ const TagList = styled.ul`
 const AddTag = styled.button`
   position: fixed;
   bottom: 0;
-  display: inline-flex;
+  display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  width: 100%;
   font-size: 20px;
   padding: 18px 0;
   background-color: #fff;
@@ -59,7 +71,7 @@ function Tags() {
   const [modalTitle, setModalTitle] = useState('编辑标签')
   const {tags, deleteTag} = useTags()
   return (
-    <>
+    <TagWrapper>
       <TopBar pageTitle={'标签设置'} returnIcon={true}></TopBar>
       <TagList>
         {tags.map(tag =>
@@ -96,7 +108,7 @@ function Tags() {
           <TagEdit value={selectedTag} closeModal={hide}/>
         </RenderModal>
       </TagList>
-    </>
+    </TagWrapper>
   );
 }
 

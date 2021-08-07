@@ -14,8 +14,10 @@ import { Tooltip } from '../components/Tooltip';
 import dayjs from 'dayjs';
 
 const EditLayout = styled(Layout)`
-    display:flex;
-    flex-direction: column;
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
 `
 
 const today = dayjs().format('YYYY-MM-DD')
