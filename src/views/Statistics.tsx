@@ -53,6 +53,24 @@ const Header = styled.div`
     position: absolute;right: 16px;
   }
 `
+const BlankPage = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  color: #bbb;
+  .icon {
+    fill: #bbb;
+    width: 100%;
+    font-size: 72px;
+  }
+  span {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+  }
+`
 
 function Statistics() {
   const [currentDate, setCurrentDate] = useState(dayjs().format('YYYY-MM'))
@@ -121,39 +139,47 @@ function Statistics() {
         }} disabled={disabled} toggle={() => setDisabled(!disabled)} />
         <div>总{category === '-' ? '支出' : '收入'}：￥{getAmountTotal()}</div>
       </AmountTotal>
-      <DailyComparisonChart data={getDailyData()} />
-      <TagsComparisonChart data={getTagData()} />
-      {hashByDateArray.map(([date, records]) => {
-        return (
-          <div key={date}>
-            <Header>
-              {beautify(date)}
-              <span className='total'>￥{records.reduce((sum, item) => {
-                return sum + item.amount;
-              }, 0)}</span>
-            </Header>
-            {records.map(record => {
-              return (
-                <div key={record.id}>
-                  <RecordItem>
-                    <Icon name={record.tag.iconName} />
-                    <span className="tagName">{record.tag.chinese}</span>
-                    <span className='note'>{record.note}</span>
-                    <span className='amount'>￥{record.amount}</span>
-                    <Link to={'/edit/' + record.id} className='edit'>
-                      <Icon name='modify' />
-                    </Link>
-                    <button className='delete' onClick={() => {
-                      deleteRecord(record.id)
-                    }}>
-                      <Icon name='delete' />
-                    </button>
-                  </RecordItem>
-                </div>
-              )
-            })}
-          </div>)
-      })}
+      {selectedRecords.length === 0 ?
+        <BlankPage>
+          <Icon name='anonymous' />
+          <span>无记录</span>
+        </BlankPage> :
+        <>
+          <DailyComparisonChart data={getDailyData()} />
+          <TagsComparisonChart data={getTagData()} />
+          {hashByDateArray.map(([date, records]) => {
+            return (
+              <div key={date}>
+                <Header>
+                  {beautify(date)}
+                  <span className='total'>￥{records.reduce((sum, item) => {
+                    return sum + item.amount;
+                  }, 0)}</span>
+                </Header>
+                {records.map(record => {
+                  return (
+                    <div key={record.id}>
+                      <RecordItem>
+                        <Icon name={record.tag.iconName} />
+                        <span className="tagName">{record.tag.chinese}</span>
+                        <span className='note'>{record.note}</span>
+                        <span className='amount'>￥{record.amount}</span>
+                        <Link to={'/edit/' + record.id} className='edit'>
+                          <Icon name='modify' />
+                        </Link>
+                        <button className='delete' onClick={() => {
+                          deleteRecord(record.id)
+                        }}>
+                          <Icon name='delete' />
+                        </button>
+                      </RecordItem>
+                    </div>
+                  )
+                })}
+              </div>)
+          })}
+        </>
+      }
     </Layout>
   );
 }
