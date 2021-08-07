@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   }
 `
 const Main = styled.div`
-  flex-grow: 1;
+  flex: 1;
   overflow: auto;
 `
 const Layout =(props: any) => {

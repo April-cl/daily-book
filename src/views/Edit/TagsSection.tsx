@@ -7,12 +7,13 @@ import { useModal } from '../../hooks/useModal';
 
 const Wrapper = styled.section`
   background-color: #fff;
-  flex-grow: 1;
+  flex: 1;
+  overflow-y: auto;
   > ul {
     display: flex;
     flex-wrap: wrap;
     > li {
-      padding: 12px 20px;
+      padding: 8px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
