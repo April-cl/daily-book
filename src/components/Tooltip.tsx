@@ -27,7 +27,7 @@ const Tooltip:React.FC<Props> = (props) => {
       <div className="content">
         {props.content}
       </div>
-      <button className="closeButton" onClick={() => {props.closeModal();}}>知道了</button>
+      <button className="closeButton" onClick={() => {props.closeModal();window.location.reload()}}>知道了</button>
     </Wrapper>
   )
 }

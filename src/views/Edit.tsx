@@ -57,8 +57,6 @@ function Edit() {
         addRecord(record)
       }
       setContent('记下啦~~~')
-      setRecord(defaultRecord)
-      setOutput('0')
       // @ts-ignore
       outputRef.current?.func()
     } else if (resultNumber === 1) {

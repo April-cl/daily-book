@@ -65,7 +65,6 @@ const TagEdit: React.FC<Props> = (props) => {
   const close = () => {
     hide()
     props.closeModal()
-    window.location.reload()
   }
   useEffect(() => {
     setInputValue(tag.chinese)
