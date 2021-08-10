@@ -59,6 +59,7 @@ function Edit() {
       setContent('记下啦~~~')
       // @ts-ignore
       outputRef.current?.func()
+      setRecord(defaultRecord)
     } else if (resultNumber === 1) {
       setContent('金额还没写呢！')
     } else if (resultNumber === 2) {
