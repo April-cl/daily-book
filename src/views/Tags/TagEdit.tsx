@@ -77,7 +77,7 @@ const TagEdit: React.FC<Props> = (props) => {
         <Icon name={tag?.iconName} />
       </div>
       <div className="editName">
-        <label>标签名</label>
+        <label>标签</label>
         <input value={inputValue} onChange={(e) => {
           setInputValue(e.target.value)
         }}/>
