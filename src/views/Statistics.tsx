@@ -15,8 +15,7 @@ const RecordItem = styled.div`
   align-items: center;
   justify-content: space-between;
   background: white;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 12px;
   padding: 10px 16px;
   > .tagName {
     margin-left: 5px;
@@ -43,9 +42,13 @@ const AmountTotal = styled.div`
   flex-wrap: nowrap;
   justify-content: space-between;
   background-color: #fff;
+  @media(max-width:500px) {
+    padding: 0 16px;
+    font-size: 12px;
+  }
 `
 const Header = styled.div`
-  font-size: 18px;
+  font-size: 14px;
   line-height: 20px;
   padding: 10px 16px;
   position: relative;

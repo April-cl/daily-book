@@ -50,8 +50,7 @@ const Wrapper = styled.section`
     }
   }
   > .all {
-    margin-left: 20px;
-    margin-right: 10px;
+    margin-left: 16px;
     > label {
       position: relative;
       input {
@@ -76,6 +75,12 @@ const Wrapper = styled.section`
         }
         &:checked + span {
           color: #26b59a;
+        }
+        @media (max-width: 500px) {
+          &:after {
+            width: 14px;
+            height: 14px;
+          }
         }
       }
     }
