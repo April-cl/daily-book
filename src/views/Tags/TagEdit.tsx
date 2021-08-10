@@ -8,17 +8,18 @@ import { useModal } from '../../hooks/useModal';
 const TagEditWrapper = styled.div`
   .editIcon, .editName {
     margin: 10px 0;
-    padding: 20px;
+    padding: 8px;
     background-color:  #fff;
+    font-size: 16px;
     label {
       display: inline-block;
-      width: 60px;
+      width: 48px;
       text-align: right;
-      margin: 0 10px;
+      margin-right: 10px;
       color: #999;
     }
     input {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
   .buttonGroup {
@@ -26,11 +27,11 @@ const TagEditWrapper = styled.div`
     justify-content: space-between;
     padding: 0 10%;
     .submit, .close {
-      font-size: 18px;
+      font-size: 16px;
       border-radius: 10px;
       background-color: #26b59a;
       color: #fff;
-      padding: 10px 30px;
+      padding: 10px 16px;
     }
     .close {
       background-color: #ababab;
@@ -97,7 +98,7 @@ const TagEdit: React.FC<Props> = (props) => {
           } else if (testTag(inputValue) === 2) {
             setContent('标签名已存在')
           }
-        }}>确定修改</button>
+        }}>确定</button>
       </div>
 
       <RenderModal modalTitle='提交结果'>
