@@ -5,6 +5,6 @@ cd build &&
 git init &&
 git add . &&
 git commit -m 'deploy' &&
-git remote add origin git@gitee.com:april-cl/daily-book-website.git &&
-git push -u origin master -f
+git push -f git@gitee.com:april-cl/daily-book-website.git master:main
+
 cd -
