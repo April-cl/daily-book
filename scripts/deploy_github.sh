@@ -5,7 +5,5 @@ cd build &&
 git init &&
 git add . &&
 git commit -m 'deploy' &&
-git remote add origin git@github.com:April-cl/daily-book-website.git &&
-git branch -M main &&
-git push -u origin main -f
+git push -f git@github.com:April-cl/daily-book-website.git
 cd -

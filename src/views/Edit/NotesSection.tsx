@@ -4,7 +4,7 @@ import React from 'react';
 
 const Wrapper = styled.section`
   border-bottom: 1px solid #7a7a7a;
-  margin: 0 20px 20px;
+  margin: 5px 20px;
   height: 40px;
   line-height: 40px;
   position: relative;

@@ -7,7 +7,7 @@ const Wrapper = styled.section`
   position: relative;
   cursor: pointer;
   border-bottom: 1px solid #7a7a7a;
-  margin: 10px 20px;
+  margin: 5px 20px;
   min-height: 40px;
   line-height: 40px;
   font-size: 16px;

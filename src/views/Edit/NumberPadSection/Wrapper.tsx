@@ -3,13 +3,13 @@ import styled from 'styled-components';
 const Wrapper = styled.section`
   > .pad {
     padding: 10px;
-    height: 240px;
+    height: 180px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    grid-gap: 10px;
+    grid-gap: 6px;
     > button {
-      font-size: 20px;
+      font-size: 16px;
       border-radius: 10px;
       background-color: #fff;
       &.zero {
